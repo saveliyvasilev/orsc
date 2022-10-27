@@ -10,4 +10,5 @@ $ pyenv virtualenv 3.10.7 orsc-3.10.7
 $ echo orsc-3.10.7 > .python-version
 $ pip install requirements.txt
 ```
-
+## Code style
+Use `pylint` and `black`
