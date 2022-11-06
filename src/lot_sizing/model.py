@@ -35,16 +35,12 @@ class LotSizingModel:
             print("Strange things, undefined or not solved...")
         if pl.const.LpStatus[status] in ["Optimal"]:
             print("Yey! Optimal!")
-            from pprint import pprint
-
             return ModelOutput(
                 model_input=self.input,
                 solution_status=SolutionStatus.SUCCESS,
                 variables=self._extract_variable_values(),
                 objective=self._extract_objective_values(),
             )
-            pprint(self._extract_variable_values())
-            # return SolveStatus.SUCCESS
         # return SolveStatus.FAIL
         return ModelOutput(
             model_input=self.input,
@@ -114,7 +110,11 @@ class LotSizingModel:
         self.objective_function = ObjectiveFunction(
             production_cost=production_cost, stock_cost=stock_cost
         )
-        self._model += self.objective_function.production_cost, "Obj func"
+        self._model += (
+            self.objective_function.production_cost
+            + self.objective_function.stock_cost,
+            "Obj func",
+        )
 
     def _add_constraints(self):
         """Adds all the constraints"""
