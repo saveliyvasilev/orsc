@@ -1,0 +1,21 @@
+\documentclass[12pt, a4paper]{article}
+\title{Blending model}
+\author{Saveliy Vasilev}
+\date{November 2022}
+\begin{document}
+\maketitle
+Hi there! asd
+
+To add the hard bounds for the assay once would initially think of
+$$
+\frac{\sum_{p, o} load_{p, o} * asy_{p}}{total_load_o} \leq asy_ub
+$$
+
+Which would work well if $total_load_o$ is a constant, but it might not be since we allow for underload.
+
+One way is to rewrite the expression with the underload considered, and leaving the constraint as a linear one:
+
+$$
+\frac{\sum_{p, o} load_{p, o} * asy_{p}}{demand_o} \leq asy_ub * (demand_o - underload_o)
+$$
+\end{document}
