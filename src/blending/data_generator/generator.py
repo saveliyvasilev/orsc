@@ -31,7 +31,7 @@ heavy_crude_oil = {
 
 
 def _generate_specific_crude_table(
-    assay_statistics, n_samples, reserve_mean, reserve_sigma
+    assay_statistics, n_samples, reserve_mean, reserve_sigma, cost=50.0
 ) -> pd.DataFrame:
     API_gravity = _normal_distribution(
         assay_statistics["API_gravity"]["mu"],
@@ -44,8 +44,14 @@ def _generate_specific_crude_table(
         n_samples,
     )
     reserves = np.abs(_normal_distribution(reserve_mean, reserve_sigma, n_samples))
+    costs = np.ones(n_samples) * cost
     return pd.DataFrame(
-        {"API_gravity": API_gravity, "sulfur": sulfur, "reserves": reserves}
+        {
+            "API_gravity": API_gravity,
+            "sulfur": sulfur,
+            "reserves": reserves,
+            "cost": costs,
+        }
     )
 
 
