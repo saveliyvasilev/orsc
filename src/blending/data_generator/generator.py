@@ -12,7 +12,7 @@ light_crude_oil = {
         "mu": 39.55,
         "sigma": 1.19,
     },
-    "sulphur": {
+    "sulfur": {
         "mu": 0.13,
         "sigma": 0.023,
     },
@@ -23,7 +23,7 @@ heavy_crude_oil = {
         "mu": 26.22,
         "sigma": 3.52,
     },
-    "sulphur": {
+    "sulfur": {
         "mu": 0.2,
         "sigma": 0.04,
     },
@@ -38,14 +38,14 @@ def _generate_specific_crude_table(
         assay_statistics["API_gravity"]["sigma"],
         n_samples,
     )
-    sulphur = _normal_distribution(
-        assay_statistics["sulphur"]["mu"],
-        assay_statistics["sulphur"]["sigma"],
+    sulfur = _normal_distribution(
+        assay_statistics["sulfur"]["mu"],
+        assay_statistics["sulfur"]["sigma"],
         n_samples,
     )
     reserves = np.abs(_normal_distribution(reserve_mean, reserve_sigma, n_samples))
     return pd.DataFrame(
-        {"API_gravity": API_gravity, "sulphur": sulphur, "reserves": reserves}
+        {"API_gravity": API_gravity, "sulfur": sulfur, "reserves": reserves}
     )
 
 
@@ -78,21 +78,21 @@ def _generate_specific_orders(
     API_gravity_hard_lb = API_gravity_lb * 0.9
     API_gravity_hard_ub = API_gravity_ub * 1.1
 
-    sulphur_lb = _normal_distribution(
-        assay_statistics["sulphur"]["mu"] * 0.95,
-        assay_statistics["sulphur"]["sigma"],
+    sulfur_lb = _normal_distribution(
+        assay_statistics["sulfur"]["mu"] * 0.95,
+        assay_statistics["sulfur"]["sigma"],
         n_samples,
     )
-    sulphur_lb_to_ub_increase = np.abs(
+    sulfur_lb_to_ub_increase = np.abs(
         _normal_distribution(
-            assay_statistics["sulphur"]["sigma"],
-            assay_statistics["sulphur"]["sigma"],
+            assay_statistics["sulfur"]["sigma"],
+            assay_statistics["sulfur"]["sigma"],
             n_samples,
         )
     )
-    sulphur_ub = sulphur_lb + sulphur_lb_to_ub_increase
-    sulphur_hard_lb = sulphur_lb * 0.9
-    sulphur_hard_ub = sulphur_ub * 1.1
+    sulfur_ub = sulfur_lb + sulfur_lb_to_ub_increase
+    sulfur_hard_lb = sulfur_lb * 0.9
+    sulfur_hard_ub = sulfur_ub * 1.1
 
     amount = _normal_distribution(order_amount_mean, order_amount_sigma, n_samples)
     return pd.DataFrame(
@@ -101,10 +101,10 @@ def _generate_specific_orders(
             "API_gravity_soft_lb": API_gravity_lb,
             "API_gravity_soft_ub": API_gravity_ub,
             "API_gravity_hard_ub": API_gravity_hard_ub,
-            "sulphur_hard_lb": sulphur_hard_lb,
-            "sulphur_soft_lb": sulphur_lb,
-            "sulphur_soft_ub": sulphur_ub,
-            "sulphur_hard_ub": sulphur_hard_ub,
+            "sulfur_hard_lb": sulfur_hard_lb,
+            "sulfur_soft_lb": sulfur_lb,
+            "sulfur_soft_ub": sulfur_ub,
+            "sulfur_hard_ub": sulfur_hard_ub,
             "amount": amount,
         }
     )
