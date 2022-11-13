@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const Header = () => {
 
     const logo = (<svg width="41" height="55" viewBox="0 0 41 55" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -6,11 +8,13 @@ export const Header = () => {
 
 
     return (
-        <div className="header-background">
-            <div className="header">
-                <div className="blending-logo">{logo}</div>
-                <span className="title">Blending Demo</span>
-            </div >
-        </div>
+        <Link to='/'>
+            <div className="header-background">
+                <div className="header">
+                    <div className="blending-logo">{logo}</div>
+                    <span className="title">Blending Demo</span>
+                </div >
+            </div>
+        </Link>
     )
 }
