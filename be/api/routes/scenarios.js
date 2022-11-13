@@ -84,7 +84,6 @@ router.get('/new', (req, res) => {
         })
     }
     console.log(data)
-
     res.json(data);
 }
 )

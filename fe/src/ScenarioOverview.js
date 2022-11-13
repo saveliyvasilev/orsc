@@ -70,7 +70,10 @@ export const ScenarioOverview = () => {
                     </tbody>
                 </table>
                 <div className="main-content-container right">
-                    <div className="new-scenario-btn" onClick={handleNewScenario}>New Scenario</div>
+                    <Link to={"/input"}>
+                        <div className="new-scenario-btn">New Scenario</div>
+                    </Link>
+                    <div className="new-scenario-btn" onClick={handleNewScenario}>New Row</div>
                 </div>
             </div>
         </div>
