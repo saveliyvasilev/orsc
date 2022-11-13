@@ -1,3 +1,4 @@
+const reader = require('xlsx')
 const express = require('express')
 const router = express.Router()
 
@@ -58,5 +59,34 @@ router.post('/', (req, res) => {
     mock_scenarios.push(new_entry);
     res.status(201).json(new_entry)
 })
+
+router.get('/new', (req, res) => {
+    // Fetch raw data for new scenario and return in json format
+    // TODO: Here a lot of the code will be written to pull data from many
+    // systems, so might be a good idea to refactor it a bit in order to avoid 
+    // rabbit holes.
+
+    // Reading the manual excel file -- note that this file can be mounted via docker 
+    console.log('Current directory: ' + process.cwd());
+    const file = reader.readFile('./data/input_data.xlsx')
+
+    let data = {}
+
+    const sheets = file.SheetNames
+
+    for (let i = 0; i < sheets.length; i++) {
+        const temp = reader.utils.sheet_to_json(
+            file.Sheets[file.SheetNames[i]]
+        )
+        data[sheets[i]] = []
+        temp.forEach((res) => {
+            data[sheets[i]].push(res)
+        })
+    }
+    console.log(data)
+
+    res.json(data);
+}
+)
 
 module.exports = router;

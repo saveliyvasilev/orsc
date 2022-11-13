@@ -14,3 +14,4 @@ services:
         command: npm run dev
         volumes:
             - ./be/api:/app
+            - ./be/opt_workers/blending/data_generator:/app/data
