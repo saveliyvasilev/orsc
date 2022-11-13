@@ -1,37 +1,18 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
+import axios from './axiosInstance';
 
 export const ScenarioOverview = () => {
-    const scenarios = [{
-        id: 1,
-        name: "Extra sales to c1",
-        optTime: "16:22 16/11/2022",
-        kpi: "$ 2,580,000",
-        status: "Completed"
-    },
-    {
-        id: 2,
-        name: "Extra sales to c1",
-        optTime: "16:15 16/11/2022",
-        kpi: "$ 2,380,000",
-        status: "Completed"
-    },
-    {
-        id: 3,
-        name: "Extra sales to c1",
-        optTime: "16:15 16/11/2022",
-        kpi: "$ 2,380,000",
-        status: "Completed"
-    },
-    {
-        id: 4,
-        name: "Extra sales to c1",
-        optTime: "16:15 16/11/2022",
-        kpi: "$ 2,380,000",
-        status: "Completed"
-    }
-    ];
+    const [scenarios, setScenarios] = useState(null);
 
+    useEffect(() => {
+        const getScenarios = async () => {
+            const res = await axios.get("/scenarios")
+            setScenarios(res.data)
+        }
+        getScenarios();
 
+    }, [])
     return (
         <div className="main-content-container-background">
             <div className="main-content-container">
@@ -46,19 +27,22 @@ export const ScenarioOverview = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {scenarios.map(scenario => (
-                            <tr key={scenario.id}>
-                                <td><Link to={"/scenarios/" + (scenario.id)}>{scenario.name}</Link></td>
-                                <td>{scenario.optTime}</td>
-                                <td>{scenario.kpi}</td>
-                                <td>{scenario.status}</td>
-                                <td>
-                                    <span className="material-symbols-outlined danger icon outlined" alt="Delete">delete</span>
-                                    <span className="material-symbols-outlined accent icon outlined" alt="Edit">edit</span>
-                                    <span className="material-symbols-outlined accent icon outlined" alt="Favotite">favorite</span>
-                                </td>
-                            </tr>
-                        ))}
+                        {scenarios == null ? <tr><td colSpan={5}>
+                            "Loading"</td></tr> :
+                            scenarios.map(scenario => (
+                                <tr key={scenario.id}>
+                                    <td><Link to={"/scenarios/" + (scenario.id)}>{scenario.name}</Link></td>
+                                    <td>{scenario.optTime}</td>
+                                    <td>{scenario.kpi}</td>
+                                    <td>{scenario.status}</td>
+                                    <td>
+                                        <span className="material-symbols-outlined danger icon outlined" alt="Delete">delete</span>
+                                        <span className="material-symbols-outlined accent icon outlined" alt="Edit">edit</span>
+                                        <span className="material-symbols-outlined accent icon outlined" alt="Favotite">favorite</span>
+                                    </td>
+                                </tr>
+                            ))
+                        }
                     </tbody>
                 </table>
                 <div className="main-content-container right">
