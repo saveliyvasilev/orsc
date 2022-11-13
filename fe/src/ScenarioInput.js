@@ -18,9 +18,26 @@ export const ScenarioInput = () => {
             })
     }, [])
 
+    function handleOptimize(e) {
+        e.stopPropagation()
+        axios
+            .post('/optimizationqueue', sInput)
+            .then((res) => {
+                if (res.status === 201) {
+                    alert("Submitted optimization!")
+                }
+            })
+    }
+
 
     return (
         <>
+            <div className="main-content-container-background">
+                <div className="main-content-container">
+                    <div>Scenario name: {sInput.name}</div>
+                </div>
+            </div>
+
             <div className="main-content-container-background">
                 <div className="main-content-container">
                     <DataTable value={sInput.products} header="Products" responsiveLayout="scroll">

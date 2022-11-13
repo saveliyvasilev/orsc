@@ -1,6 +1,7 @@
 const reader = require('xlsx')
 const express = require('express')
 const router = express.Router()
+const { v4: uuidv4 } = require('uuid')
 
 let mock_scenarios = [
     {
@@ -69,8 +70,12 @@ router.get('/new', (req, res) => {
     // Reading the manual excel file -- note that this file can be mounted via docker 
     console.log('Current directory: ' + process.cwd());
     const file = reader.readFile('./data/input_data.xlsx')
-
-    let data = {}
+    new_id = uuidv4()
+    let data = {
+        id: uuidv4(),
+        name: `New scenario (${new_id})`,
+        status: "New",
+    }
 
     const sheets = file.SheetNames
 
@@ -83,7 +88,6 @@ router.get('/new', (req, res) => {
             data[sheets[i]].push(res)
         })
     }
-    console.log(data)
     res.json(data);
 }
 )
