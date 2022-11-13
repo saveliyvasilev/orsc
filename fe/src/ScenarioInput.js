@@ -57,6 +57,12 @@ export const ScenarioInput = () => {
                     </DataTable>
                 </div>
             </div>
+
+            <div className="main-content-container-background">
+                <div className="main-content-container right">
+                    <div className="new-scenario-btn" onClick={handleOptimize}>Optimize!</div>
+                </div>
+            </div>
         </>
     )
 }

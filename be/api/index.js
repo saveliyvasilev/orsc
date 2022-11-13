@@ -10,10 +10,12 @@ app.use(
         origin: "*",
     })
 )
+app.use(express.json())
 
 const scenariosRouter = require('./routes/scenarios')
-
+const optimizationQueueRouter = require('./routes/optimizationqueue')
 app.use('/scenarios', scenariosRouter)
+app.use('/optimizationqueue', optimizationQueueRouter)
 
 app.listen(PORT,
     () => {
