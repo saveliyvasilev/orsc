@@ -64,7 +64,7 @@ table {
 
     td,
     th {
-        padding: 1em 1em;
+        padding: .9em 1em;
     }
 
     tr {
@@ -147,7 +147,8 @@ table {
 
 .main-content-container {
     width: var(--max-width);
-    margin-top: 5em
+    margin-top: 5em;
+    padding-bottom: 1em;
 }
 
 .right {
