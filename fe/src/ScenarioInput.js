@@ -24,7 +24,7 @@ export const ScenarioInput = () => {
             .post('/optimizationqueue', sInput)
             .then((res) => {
                 if (res.status === 201) {
-                    alert("Submitted optimization!")
+                    console.log("Submitted optimization!")
                 }
             })
     }

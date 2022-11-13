@@ -3,27 +3,33 @@ const express = require('express')
 
 const router = express.Router()
 
-const scenario = { name: "MyName" }
 
-async function connectAmqp() {
+// TODO: Make this connection manager thing more robust, consider using the
+// amqp-connection-manager or read more about the subject. Now we're creating a 
+// new connection each time we need to queue -- might be a bad idea (but.. we don't
+// typically expect a huge load on the queues)
+async function enqueue(scenario) {
     try {
-        const amqpConnection = await amqp.connect(`amqp://guest:guest:rabbitmq:5672`);
+        const amqpConnection = await amqp.connect(`amqp://rabbitmq:5672`);
         const channel = await amqpConnection.createChannel();
-        const result = await channel.assertQueue("blendingScenario");
+        await channel.assertQueue("blendingScenario");
+        console.log("Opened amqp conn")
         channel.sendToQueue("blendingScenario", Buffer.from(JSON.stringify(scenario)));
         console.log("Enqueued " + scenario.name)
+        setTimeout(function () {
+            amqpConnection.close();
+            console.log("Closed amqp conn")
+        }, 500);
+
     } catch (ex) {
         console.log(ex)
     }
 }
-connectAmqp();
-// amqp.
 
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     // Enqueue the optimization scenario
-    console.log(req.body)
-
+    await enqueue(req.body)
     res.status(201).json()
 })
 

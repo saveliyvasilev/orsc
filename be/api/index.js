@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require("cors")
+const listenToWorkers = require('./consumer')
 
 const PORT = process.env.PORT || 3001;
 
@@ -22,3 +23,5 @@ app.listen(PORT,
         console.log(`Listening at port ${PORT}`)
     }
 )
+
+listenToWorkers()
