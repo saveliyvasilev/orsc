@@ -7,3 +7,10 @@ services:
         command: npm run start
         volumes:
             - ./fe:/app
+    api:
+        build: ./be/api
+        ports:
+            - "3001:3001"
+        command: npm run dev
+        volumes:
+            - ./be/api:/app
