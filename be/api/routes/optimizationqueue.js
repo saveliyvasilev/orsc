@@ -1,11 +1,10 @@
-const amqp = require('amqplib')
-const express = require('express')
+const amqp = require("amqplib");
+const express = require("express");
 
-const router = express.Router()
-
+const router = express.Router();
 
 // TODO: Make this connection manager thing more robust, consider using the
-// amqp-connection-manager or read more about the subject. Now we're creating a 
+// amqp-connection-manager or read more about the subject. Now we're creating a
 // new connection each time we need to queue -- might be a bad idea (but.. we don't
 // typically expect a huge load on the queues)
 async function enqueue(scenario) {
@@ -13,24 +12,22 @@ async function enqueue(scenario) {
         const amqpConnection = await amqp.connect(`amqp://rabbitmq:5672`);
         const channel = await amqpConnection.createChannel();
         await channel.assertQueue("blendingScenario");
-        console.log("Opened amqp conn")
+        console.log("Opened amqp conn");
         channel.sendToQueue("blendingScenario", Buffer.from(JSON.stringify(scenario)));
-        console.log("Enqueued " + scenario.name)
+        console.log("Enqueued " + scenario.name);
         setTimeout(function () {
             amqpConnection.close();
-            console.log("Closed amqp conn")
+            console.log("Closed amqp conn");
         }, 500);
-
     } catch (ex) {
-        console.log(ex)
+        console.log(ex);
     }
 }
 
-
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
     // Enqueue the optimization scenario
-    await enqueue(req.body)
-    res.status(201).json()
-})
+    await enqueue(req.body);
+    res.status(201).json();
+});
 
 module.exports = router;

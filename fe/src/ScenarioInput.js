@@ -1,34 +1,29 @@
-import axios from './axiosInstance'
-import { prcfg } from './config'
-import { useState, useEffect } from 'react'
+import axios from "./axiosInstance";
+import { prcfg } from "./config";
+import { useState, useEffect } from "react";
 
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
 
 export const ScenarioInput = () => {
-    const [sInput, setSInput] = useState({})
+    const [sInput, setSInput] = useState({});
     useEffect(() => {
         // TODO: This should call a GET for a fresh data pull and jump to an overview page; not make a new scenario entry via POST
-        axios
-            .get('/scenarios/new')
-            .then((res) => {
-                if (res.status === 200) {
-                    setSInput(res.data)
-                }
-            })
-    }, [])
+        axios.get("/scenarios/new").then((res) => {
+            if (res.status === 200) {
+                setSInput(res.data);
+            }
+        });
+    }, []);
 
     function handleOptimize(e) {
-        e.stopPropagation()
-        axios
-            .post('/optimizationqueue', sInput)
-            .then((res) => {
-                if (res.status === 201) {
-                    console.log("Submitted optimization!")
-                }
-            })
+        e.stopPropagation();
+        axios.post("/optimizationqueue", sInput).then((res) => {
+            if (res.status === 201) {
+                console.log("Submitted optimization!");
+            }
+        });
     }
-
 
     return (
         <>
@@ -51,7 +46,13 @@ export const ScenarioInput = () => {
             </div>
             <div className="main-content-container-background">
                 <div className="main-content-container">
-                    <DataTable value={sInput.orders} header="Orders" scrollable scrollHeight={prcfg.scrollHeight} responsiveLayout="scroll">
+                    <DataTable
+                        value={sInput.orders}
+                        header="Orders"
+                        scrollable
+                        scrollHeight={prcfg.scrollHeight}
+                        responsiveLayout="scroll"
+                    >
                         <Column field="order_id" header="Order ID"></Column>
                         <Column field="amount" header="Amount"></Column>
                     </DataTable>
@@ -60,9 +61,11 @@ export const ScenarioInput = () => {
 
             <div className="main-content-container-background">
                 <div className="main-content-container right">
-                    <div className="new-scenario-btn" onClick={handleOptimize}>Optimize!</div>
+                    <div className="new-scenario-btn" onClick={handleOptimize}>
+                        Optimize!
+                    </div>
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
