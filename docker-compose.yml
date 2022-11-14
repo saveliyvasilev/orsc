@@ -1,5 +1,22 @@
 version: '3.9'
 services:
+    api:
+        build:
+            context: ./be/api
+            target: prod  # Replace this for prod to prod
+        ports:
+            - "3001:3001"
+            - "9229:9229"  # for attaching node debugger
+        volumes:
+            - ./be/api:/app
+            - ./be/workers/blending/data_generator:/app/data
+        depends_on:
+            - rabbitmq
+    rabbitmq:
+        image: rabbitmq:3-management
+        ports:
+            - 5672:5672
+            - 15672:15672
     web:
         build: ./fe
         ports:
@@ -7,16 +24,3 @@ services:
         command: npm run start
         volumes:
             - ./fe:/app
-    api:
-        build: ./be/api
-        ports:
-            - "3001:3001"
-        command: npm run dev
-        volumes:
-            - ./be/api:/app
-            - ./be/opt_workers/blending/data_generator:/app/data
-    rabbitmq:
-        image: rabbitmq:3-management
-        ports:
-            - 5672:5672
-            - 15672:15672

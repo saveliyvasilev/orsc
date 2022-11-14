@@ -4,6 +4,7 @@ const amqp = require("amqplib");
 // When we see a compelted job we store it into the database.
 
 async function listenToWorkers() {
+    await new Promise((resolve) => setTimeout(resolve, 4000)); // Some delay to allow rabbitmq to spin up -- this should be refactored into something that would reconnect :)
     try {
         const amqpConnection = await amqp.connect(`amqp://rabbitmq:5672`);
         const channel = await amqpConnection.createChannel();
