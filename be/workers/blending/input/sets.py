@@ -3,7 +3,7 @@
 
 from abc import ABC, abstractmethod
 from typing import Set
-from ..types import Sets, Coefficients
+from ..model_types import Sets, Coefficients
 
 
 class ProductsFactory(ABC):

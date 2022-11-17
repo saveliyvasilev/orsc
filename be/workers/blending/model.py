@@ -1,6 +1,6 @@
 from typing import Dict, Tuple
 import pulp as pl
-from .types import (
+from .model_types import (
     ModelInput,
     ModelOutput,
     ObjectiveFunction,
