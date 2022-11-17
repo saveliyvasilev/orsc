@@ -20,7 +20,6 @@ class AMQPWorker:
         print(f"Received {scenario['id']}")
         result = self._fn(json.loads(body))
         print(f"Computation finished with status: {result['status']}")
-        # TODO: enqueue in reply queue
         self._channel.basic_publish(
             exchange="", routing_key=self._output_queue, body=json.dumps(result)
         )
