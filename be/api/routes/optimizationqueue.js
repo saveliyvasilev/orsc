@@ -1,5 +1,6 @@
 const amqp = require("amqplib");
 const express = require("express");
+const BlendingScenario = require("../BlendingScenario");
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ async function enqueue(scenario) {
         await channel.assertQueue("blendingScenario");
         console.log("Opened amqp conn");
         channel.sendToQueue("blendingScenario", Buffer.from(JSON.stringify(scenario)));
-        console.log("Enqueued " + scenario.name);
+        console.log(`Enqueued (id: ${scenario.id}) ${scenario.name}`);
         setTimeout(function () {
             amqpConnection.close();
             console.log("Closed amqp conn");
@@ -25,7 +26,10 @@ async function enqueue(scenario) {
 }
 
 router.post("/", async (req, res) => {
-    // Enqueue the optimization scenario
+    // Create an element in the database
+    const newScenario = new BlendingScenario(req.body);
+    await newScenario.save();
+    // Enqueue the optimization scenario for worker to pick up
     await enqueue(req.body);
     res.status(201).json();
 });

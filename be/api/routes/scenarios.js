@@ -71,18 +71,19 @@ router.get("/new", (req, res) => {
     const file = reader.readFile("./data/input_data.xlsx");
     new_id = uuidv4();
     let data = {
-        id: uuidv4(),
+        id: new_id,
         name: `New scenario (${new_id})`,
         status: "New",
+        input: {},
     };
 
     const sheets = file.SheetNames;
 
     for (let i = 0; i < sheets.length; i++) {
         const temp = reader.utils.sheet_to_json(file.Sheets[file.SheetNames[i]]);
-        data[sheets[i]] = [];
+        data.input[sheets[i]] = [];
         temp.forEach((res) => {
-            data[sheets[i]].push(res);
+            data.input[sheets[i]].push(res);
         });
     }
     res.json(data);

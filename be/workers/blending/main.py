@@ -7,8 +7,9 @@ def fn_solve(raw_input):
     """Transform a json input into a json output"""
     return {
         "result": "I love you but I cannot do much.",
-        "status": "Done",
+        "status": "Doddne",
         "name": raw_input["name"],
+        "id": raw_input["id"],
     }
 
 

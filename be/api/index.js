@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const listenToWorkers = require("./consumer");
+const database = require("./database");
 
 const PORT = process.env.PORT || 3001;
 
