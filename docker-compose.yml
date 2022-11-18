@@ -1,9 +1,18 @@
 version: '3.9'
 services:
+    blending-worker:
+        build:
+            context: ./be  # This context is done in this way to include the shared_lib in the blending worker dockerfile.
+            dockerfile: ./workers/blending/Dockerfile
+        depends_on:
+            - rabbitmq
+        volumes:
+            - ./be/workers/blending:/app
+            - ./be/shared_lib:/shared_lib
     api:
         build:
             context: ./be/api
-            target: prod  # Replace this for prod to prod
+            target: debug  # Replace this for prod to prod
         ports:
             - "3001:3001"
             - "9229:9229"  # for attaching node debugger
