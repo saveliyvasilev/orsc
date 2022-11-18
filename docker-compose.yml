@@ -33,3 +33,7 @@ services:
         command: npm run start
         volumes:
             - ./fe:/app
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017"
