@@ -28,5 +28,12 @@
                 }
             ]
         },
+        {
+            "name": "Run local Blending Worker",
+            "type": "python",
+            "request": "launch",
+            "module": "be.workers.blending.main",
+            "justMyCode": true
+        },
     ]
 }
