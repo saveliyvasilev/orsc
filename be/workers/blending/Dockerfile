@@ -9,7 +9,12 @@ RUN pip install -e ./workers
 
 WORKDIR /app
 COPY . .
-CMD [ "python", "-u", "main.py"]
+
+#Below is the prod command  #TODO: make these conditional on target ENV somehow (so we don't deploy a debug version)
+# CMD [ "python", "-u", "main.py"]
+
+# Below is the debug command for connecting from VScode to a container in debug mode
+CMD [ "python", "-u", "-m", "debugpy", "--listen", "0.0.0.0:5678", "main.py"]
 
 # FROM node:19 as prod
 # WORKDIR /app

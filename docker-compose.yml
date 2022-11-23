@@ -9,6 +9,8 @@ services:
         volumes:
             - ./be/workers/blending:/app
             - ./be/shared_lib:/shared_lib
+        ports:
+            - 5678:5678  # TODO: port for debugging, make this conditional on deployment environment (DEV vs PROD)
     api:
         build:
             context: ./be/api
