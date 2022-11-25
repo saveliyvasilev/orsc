@@ -25,6 +25,7 @@ class Constraints:
 @dataclass
 class ObjectiveFunction:
     product_cost: pl.LpAffineExpression | float
+    underload: pl.LpAffineExpression | float
     asy_lower_deviation: pl.LpAffineExpression | float
     asy_upper_deviation: pl.LpAffineExpression | float
 

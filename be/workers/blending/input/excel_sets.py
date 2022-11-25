@@ -8,7 +8,7 @@ class ExcelAssaysFactory(AssaysFactory):
         super().__init__()
 
     def build(self) -> Set[str]:
-        return {"API_gravity", "sulfur"}
+        return {"API_gravity", "sulfur"}  # TODO: Hardcoded
 
 
 class ExcelProductsFactory(ProductsFactory):

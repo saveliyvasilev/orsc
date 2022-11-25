@@ -83,11 +83,7 @@ class BlendingModel:
         )
         underload = pl.LpVariable.dicts(
             "underload",
-            [
-                (product, order)
-                for product in self.input.sets.products
-                for order in self.input.sets.orders
-            ],
+            [order for order in self.input.sets.orders],
             lowBound=0,
             upBound=None,
             cat=pl.const.LpContinuous,
@@ -141,12 +137,31 @@ class BlendingModel:
             for o in self.input.sets.orders
             for a in self.input.sets.assays
         )
+        underload = pl.lpSum(self.vars.underload[o] for o in self.input.sets.orders)
         self.objective_function = ObjectiveFunction(
             product_cost=product_cost,
+            underload=underload,
             asy_lower_deviation=asy_lower_deviation,
             asy_upper_deviation=asy_upper_deviation,
         )
-        self._model += sum(asdict(self.objective_function).values()), "Obj func"
+        # TODO: somehow if we do pl.lpSum(asdict(self.objective_function).values()), we get somewhere a comparison that breaks the model when we call solve()
+        # it's a strange behavior that might be worth exploring a bit longer, and even mabe contributing a patch to pulp codebase.
+        # self._model += pl.lpSum(list(asdict(self.objective_function).values()))
+        # This crashes in line 275 of pulp/mps_lp.py, in lines
+        #      # objective function
+        # if variable in cobj: <<<<--- here.
+        # Apparently the comparison used in the "in" breaks the code if we make the objective function as indicated above.. This is a strange behavior indeed.
+
+        # Same thing happens here:
+        # ofunc_accum = pl.LpAffineExpression()
+        # for affine_expression in asdict(self.objective_function).values():
+        #     ofunc_accum += affine_expression
+        # self._model += ofunc_accum
+
+        # So as a workaround we use this, but please do the research.
+        self._model += pl.lpSum(
+            [product_cost, asy_lower_deviation, asy_upper_deviation, underload]
+        )
 
     def _add_constraints(self):
         """Adds all the constraints"""
@@ -188,7 +203,7 @@ class BlendingModel:
         for p in sets.products:
             out[p] = (
                 pl.lpSum(vars.load[p, o] for o in sets.orders)
-                == coeff.product_available[p]
+                <= coeff.product_available[p]
             )
         return out
 
