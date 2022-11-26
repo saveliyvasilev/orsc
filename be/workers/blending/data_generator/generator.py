@@ -124,7 +124,7 @@ def generate_orders_table() -> pd.DataFrame:
     df_non_demanding = _generate_specific_orders(heavy_crude_oil, n_non_dem, 50, 15)
 
     df = pd.concat([df_demanding, df_non_demanding])
-    df["order_id"] = np.arange(1, 1 + n_dem + n_non_dem)
+    df["order_id"] = "Order " + np.arange(1, 1 + n_dem + n_non_dem)
     return df
 
 
