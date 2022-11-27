@@ -5,26 +5,37 @@ import axios from "./axiosInstance";
 export const ScenarioOverview = () => {
     const [scenarios, setScenarios] = useState(null);
 
+    function demand(scenario) {
+        if (scenario.output === undefined) {
+            return "";
+        } else {
+            return scenario.output.kpis.total_demand;
+        }
+    }
+    function underload(scenario) {
+        if (scenario.output === undefined) {
+            return "";
+        } else {
+            return scenario.output.kpis.total_underload;
+        }
+    }
+    function cost(scenario) {
+        if (scenario.output === undefined) {
+            return "";
+        } else {
+            return scenario.output.kpis.total_product_cost;
+        }
+    }
     function handleDelete(event, scenario) {
         event.stopPropagation();
         axios
-            .delete(`/scenarios/${scenario.id}`)
+            .delete(`/scenarios/${scenario.scenario_id}`)
             .then((res) => {
                 if (res.status === 204) {
-                    setScenarios(scenarios.filter((s) => s.id !== scenario.id));
+                    setScenarios(scenarios.filter((s) => s.scenario_id !== scenario.scenario_id));
                 }
             })
             .catch((reason) => console.log(reason));
-    }
-
-    function handleNewScenario(event) {
-        // TODO: This should call a GET for a fresh data pull and jump to an overview page; not make a new scenario entry via POST
-        event.stopPropagation();
-        axios.post("/scenarios").then((res) => {
-            if (res.status === 201) {
-                setScenarios([...scenarios, res.data]);
-            }
-        });
     }
     useEffect(() => {
         const getScenarios = async () => {
@@ -41,7 +52,9 @@ export const ScenarioOverview = () => {
                         <tr>
                             <th>Scenario name</th>
                             <th>Optimization time</th>
-                            <th>Estimated cost</th>
+                            <th>Demand</th>
+                            <th>Underload</th>
+                            <th>Cost</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -53,12 +66,14 @@ export const ScenarioOverview = () => {
                             </tr>
                         ) : (
                             scenarios.map((scenario) => (
-                                <tr key={scenario.id}>
+                                <tr key={scenario.scenario_id}>
                                     <td>
-                                        <Link to={"/scenarios/" + scenario.id}>{scenario.name}</Link>
+                                        <Link to={"/scenarios/" + scenario.scenario_id}>{scenario.name}</Link>
                                     </td>
                                     <td>{scenario.optTime}</td>
-                                    <td>{scenario.kpi}</td>
+                                    <td>{demand(scenario)}</td>
+                                    <td>{underload(scenario)}</td>
+                                    <td>{cost(scenario)}</td>
                                     <td>{scenario.status}</td>
                                     <td>
                                         <span
@@ -84,9 +99,6 @@ export const ScenarioOverview = () => {
                     <Link to={"/input"}>
                         <div className="new-scenario-btn">New Scenario</div>
                     </Link>
-                    <div className="new-scenario-btn" onClick={handleNewScenario}>
-                        New Row
-                    </div>
                 </div>
             </div>
         </div>
