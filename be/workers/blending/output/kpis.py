@@ -3,7 +3,6 @@ from ..model_types import ModelOutput
 
 
 def kpis(model_output: ModelOutput) -> Dict:
-    print("KPISSS")
     return {
         "total_demand": _total_demand(model_output),
         "total_underload": _total_underload(model_output),
