@@ -71,9 +71,9 @@ router.get("/new", (req, res) => {
     const file = reader.readFile("./data/input_data.xlsx");
     new_id = uuidv4();
     let data = {
-        id: new_id,
+        scenario_id: new_id, // Note: mongoose does not like to store "id" as field, somehow it's skipped. This is why we have "scenario_id"
         name: `New scenario (${new_id})`,
-        status: "New",
+        status: "NEW",
         input: {},
     };
 

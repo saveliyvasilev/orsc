@@ -7,8 +7,12 @@ const BlendingScenario = require("./BlendingScenario");
 // When we see a compelted job we store it into the database.
 async function storeSolution(solution) {
     try {
-        await BlendingScenario.findOneAndUpdate({ id: solution.id }, { output: solution }, { new: true });
-        console.log(`Updated solution ${solution.id} in DB`);
+        await BlendingScenario.findOneAndUpdate(
+            { scenario_id: solution.scenario_id },
+            { $set: { output: solution.result, status: solution.status } },
+            { new: true }
+        );
+        console.log(`Updated solution ${solution.scenario_id} in DB`);
     } catch (ex) {
         console.error(ex);
     }

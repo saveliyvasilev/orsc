@@ -17,7 +17,7 @@ class AMQPWorker:
 
     def _callback_function(self, ch, method, properties, body):
         scenario = json.loads(body)
-        print(f"Received {scenario['id']}")
+        print(f"Received {scenario['scenario_id']}")
         result = self._fn(json.loads(body))
         print(f"Computation finished with status: {result['status']}")
         self._channel.basic_publish(
