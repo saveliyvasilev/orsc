@@ -4,9 +4,12 @@ import { useState, useEffect } from "react";
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { useNavigate } from "react-router-dom";
 
 export const ScenarioInput = () => {
     const [sInput, setSInput] = useState({});
+    const navigate = useNavigate();
+
     useEffect(() => {
         // TODO: This should call a GET for a fresh data pull and jump to an overview page; not make a new scenario entry via POST
         axios.get("/scenarios/new").then((res) => {
@@ -21,6 +24,7 @@ export const ScenarioInput = () => {
         axios.post("/optimizationqueue", sInput).then((res) => {
             if (res.status === 201) {
                 console.log("Submitted optimization!");
+                navigate("/", { replace: true });
             }
         });
     }
