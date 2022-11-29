@@ -6,7 +6,7 @@ const BlendingScenario = require("../BlendingScenario");
 
 router.get("/", async (request, response) => {
     try {
-        const scenarios = await BlendingScenario.find({});
+        const scenarios = await BlendingScenario.find({}).sort({ created_at: "desc" });
         response.json(scenarios);
     } catch (err) {
         console.error(err);
@@ -40,6 +40,7 @@ router.get("/new", (req, res) => {
         scenario_id: new_id, // Note: mongoose does not like to store "id" as field, somehow it's skipped. This is why we have "scenario_id"
         name: `New scenario (${new_id})`,
         status: "NEW",
+        created_at: new Date(),
         input: {},
     };
 
