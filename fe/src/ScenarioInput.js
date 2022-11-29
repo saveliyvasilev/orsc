@@ -1,6 +1,7 @@
 import axios from "./axiosInstance";
 import { prcfg } from "./config";
 import { useState, useEffect } from "react";
+import { assayFormat, barrelFormat, currencyFormat } from "./formatter";
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -29,6 +30,27 @@ export const ScenarioInput = () => {
         });
     }
 
+    function reservesBodyTemplate(rowData) {
+        return barrelFormat(rowData.reserves);
+    }
+
+    function APIGravityBodyTemplate(rowData) {
+        return assayFormat(rowData.API_gravity);
+    }
+
+    function sulfurBodyTemplate(rowData) {
+        return assayFormat(rowData.sulfur);
+    }
+
+    function costBodyTemplate(rowData) {
+        return currencyFormat(rowData.cost);
+    }
+
+    function demandBodyTemplate(rowData) {
+        return barrelFormat(rowData.amount);
+    }
+
+    // TODO: Refactor this into two (or more) components
     return (
         <>
             {sInput.input !== undefined ? (
@@ -42,10 +64,10 @@ export const ScenarioInput = () => {
                         <div className="main-content-container">
                             <DataTable value={sInput.input.products} header="Products" responsiveLayout="scroll">
                                 <Column field="product_id" header="Product ID"></Column>
-                                <Column field="reserves" header="Reserves"></Column>
-                                <Column field="API_gravity" header="API Gravity"></Column>
-                                <Column field="sulfur" header="Sulfur"></Column>
-                                <Column field="cost" header="Cost"></Column>
+                                <Column field="reserves" header="Reserves" body={reservesBodyTemplate}></Column>
+                                <Column field="API_gravity" header="API Gravity" body={APIGravityBodyTemplate}></Column>
+                                <Column field="sulfur" header="Sulfur" body={sulfurBodyTemplate}></Column>
+                                <Column field="cost" header="Cost" body={costBodyTemplate}></Column>
                             </DataTable>
                         </div>
                     </div>
@@ -59,7 +81,7 @@ export const ScenarioInput = () => {
                                 responsiveLayout="scroll"
                             >
                                 <Column field="order_id" header="Order ID"></Column>
-                                <Column field="amount" header="Amount"></Column>
+                                <Column field="amount" header="Demand" body={demandBodyTemplate}></Column>
                             </DataTable>
                         </div>
                     </div>

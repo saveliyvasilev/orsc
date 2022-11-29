@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "./axiosInstance";
+import moment from "moment";
+import { currencyFormat, barrelFormat } from "./formatter";
 
 export const ScenarioOverview = () => {
     const [scenarios, setScenarios] = useState(null);
@@ -9,22 +11,25 @@ export const ScenarioOverview = () => {
         if (scenario.output === undefined) {
             return "";
         } else {
-            return scenario.output.kpis.total_demand;
+            return barrelFormat(scenario.output.kpis.total_demand);
         }
     }
     function underload(scenario) {
         if (scenario.output === undefined) {
             return "";
         } else {
-            return scenario.output.kpis.total_underload;
+            return barrelFormat(scenario.output.kpis.total_underload);
         }
     }
     function cost(scenario) {
         if (scenario.output === undefined) {
             return "";
         } else {
-            return scenario.output.kpis.total_product_cost;
+            return currencyFormat(scenario.output.kpis.total_product_cost);
         }
+    }
+    function optimizationTime(scenario) {
+        return moment(scenario.created_at).fromNow();
     }
     function handleDelete(event, scenario) {
         event.stopPropagation();
@@ -70,7 +75,7 @@ export const ScenarioOverview = () => {
                                     <td>
                                         <Link to={"/scenarios/" + scenario.scenario_id}>{scenario.name}</Link>
                                     </td>
-                                    <td>{scenario.optTime}</td>
+                                    <td>{optimizationTime(scenario)}</td>
                                     <td>{demand(scenario)}</td>
                                     <td>{underload(scenario)}</td>
                                     <td>{cost(scenario)}</td>
