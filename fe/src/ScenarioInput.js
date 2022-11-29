@@ -5,7 +5,10 @@ import { assayFormat, barrelFormat, currencyFormat } from "./formatter";
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { InputText } from "primereact/inputtext";
 import { useNavigate } from "react-router-dom";
+
+// import { debounce } from "lodash";
 
 export const ScenarioInput = () => {
     const [sInput, setSInput] = useState({});
@@ -27,6 +30,13 @@ export const ScenarioInput = () => {
                 console.log("Submitted optimization!");
                 navigate("/", { replace: true });
             }
+        });
+    }
+
+    function handleScenarioNameOnChange(e) {
+        setSInput({
+            ...sInput,
+            name: e.target.value,
         });
     }
 
@@ -56,8 +66,13 @@ export const ScenarioInput = () => {
             {sInput.input !== undefined ? (
                 <>
                     <div className="main-content-container-background">
+                        <div className="main-content-container right">
+                            <div className="comment">Scenario id: {sInput.scenario_id}</div>
+                        </div>
+                    </div>
+                    <div className="main-content-container-background">
                         <div className="main-content-container">
-                            <div>Scenario name: {sInput.name}</div>
+                            <InputText value={sInput.name} onChange={handleScenarioNameOnChange}></InputText>
                         </div>
                     </div>
                     <div className="main-content-container-background">

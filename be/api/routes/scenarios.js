@@ -38,7 +38,7 @@ router.get("/new", (req, res) => {
     new_id = uuidv4();
     let data = {
         scenario_id: new_id, // Note: mongoose does not like to store "id" as field, somehow it's skipped. This is why we have "scenario_id"
-        name: `New scenario (${new_id})`,
+        name: `New scenario`,
         status: "NEW",
         created_at: new Date(),
         input: {},
