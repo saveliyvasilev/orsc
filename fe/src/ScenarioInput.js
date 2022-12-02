@@ -25,7 +25,7 @@ export const ScenarioInput = () => {
 
     function handleOptimize(e) {
         e.stopPropagation();
-        axios.post("/optimizationqueue", sInput).then((res) => {
+        axios.post("/optimization-queue", sInput).then((res) => {
             if (res.status === 201) {
                 console.log("Submitted optimization!");
                 navigate("/", { replace: true });
