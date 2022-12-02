@@ -32,7 +32,7 @@
             "name": "Run local Blending Worker",
             "type": "python",
             "request": "launch",
-            "module": "be.workers.blending.main",
+            "program": "be/workers/blending/main.py",
             "justMyCode": false
         },
     ]
