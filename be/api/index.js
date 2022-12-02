@@ -15,8 +15,10 @@ app.use(express.json());
 
 const scenariosRouter = require("./routes/scenarios");
 const optimizationQueueRouter = require("./routes/optimizationqueue");
+const currentSnapshotRouter = require("./routes/current-snapshot");
 app.use("/scenarios", scenariosRouter);
 app.use("/optimizationqueue", optimizationQueueRouter);
+app.use("/current-snapshot", currentSnapshotRouter);
 
 app.listen(PORT, () => {
     console.log(`Listening at port ${PORT}`);

@@ -16,7 +16,7 @@ export const ScenarioInput = () => {
 
     useEffect(() => {
         // TODO: This should call a GET for a fresh data pull and jump to an overview page; not make a new scenario entry via POST
-        axios.get("/scenarios/new").then((res) => {
+        axios.get("/current-snapshot").then((res) => {
             if (res.status === 200) {
                 setSInput(res.data);
             }
