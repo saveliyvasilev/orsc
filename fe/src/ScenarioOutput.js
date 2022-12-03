@@ -2,6 +2,7 @@ import axios from "./axiosInstance";
 import { prcfg } from "./config";
 import { useState, useEffect } from "react";
 import { assayFormat, barrelFormat, currencyFormat } from "./formatter";
+import { KPICard } from "./components/KPICard";
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -61,10 +62,20 @@ export const ScenarioOutput = () => {
                     </div>
                     <div className="main-content-container-background">
                         <div className="main-content-container">
-                            <h3>Key KPIs --- #TODO: make nice cards of these</h3>
-                            <p>Total demand: {barrelFormat(scenario.output.kpis.total_demand)}</p>
-                            <p>Total underload: {barrelFormat(scenario.output.kpis.total_underload)}</p>
-                            <p>Total product cost: {currencyFormat(scenario.output.kpis.total_product_cost)}</p>
+                            <div className="card-container">
+                                <KPICard
+                                    title="Total Demand"
+                                    value={barrelFormat(scenario.output.kpis.total_demand)}
+                                ></KPICard>
+                                <KPICard
+                                    title="Total Underload"
+                                    value={barrelFormat(scenario.output.kpis.total_underload)}
+                                ></KPICard>
+                                <KPICard
+                                    title="Total Cost"
+                                    value={barrelFormat(scenario.output.kpis.total_product_cost)}
+                                ></KPICard>
+                            </div>
                         </div>
                     </div>
 
