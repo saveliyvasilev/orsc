@@ -175,14 +175,18 @@ table {
 
 .card-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
+    gap: 2em;
 }
 .card {
     padding: 1em;
     background-color:var(--card);
-    h3 {
+    .card-title {
         color: var(--comment);
-        margin: 0;
+        display: flex;
+        justify-content: center;
+        font-size: 1em;
+        font-weight: bold;
     }
     .card-value  {
         font-family: var(--header-family);

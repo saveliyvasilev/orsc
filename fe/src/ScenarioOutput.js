@@ -3,6 +3,7 @@ import { prcfg } from "./config";
 import { useState, useEffect } from "react";
 import { assayFormat, barrelFormat, currencyFormat } from "./formatter";
 import { KPICard } from "./components/KPICard";
+import { OrderFulfillmentTable } from "./components/OrderFulfillmentTable";
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -78,7 +79,11 @@ export const ScenarioOutput = () => {
                             </div>
                         </div>
                     </div>
-
+                    <div className="main-content-container-background">
+                        <div className="main-content-container">
+                            <OrderFulfillmentTable orders={scenario.output.orders} />
+                        </div>
+                    </div>
                     {/* <div className="main-content-container-background">
                         <div className="main-content-container">
                             <DataTable value={scenario.input.products} header="Products" responsiveLayout="scroll">
