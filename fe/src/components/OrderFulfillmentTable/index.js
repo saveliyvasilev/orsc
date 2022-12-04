@@ -5,7 +5,7 @@ import { useState } from "react";
 import { OrderFulfillmentCard } from "./OrderFulfillmentCard";
 
 export const OrderFulfillmentTable = ({ orders }) => {
-    const [expandedRows, setExpandedRows] = useState(null);
+    const [expandedRows, setExpandedRows] = useState({});
 
     return (
         <div className="table-container">
@@ -15,10 +15,25 @@ export const OrderFulfillmentTable = ({ orders }) => {
                 expandedRows={expandedRows}
                 rowExpansionTemplate={OrderFulfillmentCard}
                 onRowToggle={(e) => {
-                    console.log(e.data);
-                    return setExpandedRows(e.data);
+                    setExpandedRows(e.data);
                 }}
                 dataKey="order_id"
+                sortField="order_id"
+                sortOrder={1}
+                onRowClick={(e) => {
+                    const id = e.data.order_id;
+                    if (id in expandedRows) {
+                        const copy = { ...expandedRows };
+                        delete copy[id];
+                        console.log(copy);
+                        setExpandedRows(copy);
+                    } else {
+                        setExpandedRows({
+                            ...expandedRows,
+                            [id]: true,
+                        });
+                    }
+                }}
             >
                 <Column expander={() => true} style={{ width: "3em" }} />
                 <Column field="order_id" header="Order" sortable></Column>
