@@ -7,6 +7,8 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { InputText } from "primereact/inputtext";
 import { useNavigate } from "react-router-dom";
+import { Section } from "./components/Section";
+import { StickyHeader } from "./components/Section/StickyHeader";
 
 // import { debounce } from "lodash";
 
@@ -65,19 +67,17 @@ export const ScenarioInput = () => {
         <>
             {sInput.input !== undefined ? (
                 <>
-                    <div className="main-content-container-background">
-                        <div className="main-content-container right">
+                    <Section>
+                        <div className="space-between">
+                            <InputText value={sInput.name} onChange={handleScenarioNameOnChange}></InputText>
                             <div className="comment">Scenario id: {sInput.scenario_id}</div>
                         </div>
-                    </div>
-                    <div className="main-content-container-background">
-                        <div className="main-content-container">
-                            <InputText value={sInput.name} onChange={handleScenarioNameOnChange}></InputText>
-                        </div>
-                    </div>
-                    <div className="main-content-container-background">
-                        <div className="main-content-container">
-                            <DataTable value={sInput.input.products} header="Products" responsiveLayout="scroll">
+                    </Section>
+
+                    <Section>
+                        <StickyHeader>Products</StickyHeader>
+                        <div className="table-container" style={{ maxHeight: "30vh" }}>
+                            <DataTable value={sInput.input.products} responsiveLayout="scroll">
                                 <Column field="product_id" header="Product ID"></Column>
                                 <Column field="reserves" header="Reserves" body={reservesBodyTemplate}></Column>
                                 <Column field="API_gravity" header="API Gravity" body={APIGravityBodyTemplate}></Column>
@@ -85,28 +85,25 @@ export const ScenarioInput = () => {
                                 <Column field="cost" header="Cost" body={costBodyTemplate}></Column>
                             </DataTable>
                         </div>
-                    </div>
-                    <div className="main-content-container-background">
-                        <div className="main-content-container">
-                            <DataTable
-                                value={sInput.input.orders}
-                                header="Orders"
-                                scrollable
-                                scrollHeight={prcfg.scrollHeight}
-                                responsiveLayout="scroll"
-                            >
+                    </Section>
+
+                    <Section>
+                        <StickyHeader>Orders</StickyHeader>
+                        <div className="table-container" style={{ maxHeight: "30vh" }}>
+                            <DataTable value={sInput.input.orders} responsiveLayout="scroll">
                                 <Column field="order_id" header="Order ID"></Column>
                                 <Column field="amount" header="Demand" body={demandBodyTemplate}></Column>
                             </DataTable>
                         </div>
-                    </div>
-                    <div className="main-content-container-background">
-                        <div className="main-content-container right">
+                    </Section>
+
+                    <Section>
+                        <div className="right">
                             <div className="new-scenario-btn" onClick={handleOptimize}>
                                 Optimize!
                             </div>
                         </div>
-                    </div>
+                    </Section>
                 </>
             ) : (
                 "Fetching data"

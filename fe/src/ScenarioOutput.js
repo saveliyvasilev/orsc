@@ -9,6 +9,8 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { InputText } from "primereact/inputtext";
 import { useNavigate, useParams } from "react-router-dom";
+import { Section } from "./components/Section";
+import { StickyHeader } from "./components/Section/StickyHeader";
 
 // import { debounce } from "lodash";
 
@@ -51,39 +53,30 @@ export const ScenarioOutput = () => {
         <>
             {scenario.input !== undefined ? (
                 <>
-                    <div className="main-content-container-background">
-                        <div className="main-content-container right">
-                            <div className="comment">Scenario id: {scenario.scenario_id}</div>
+                    <Section>
+                        <StickyHeader>{scenario.name}</StickyHeader>
+                    </Section>
+                    <Section>
+                        <div className="card-container">
+                            <KPICard
+                                title="Total Demand"
+                                value={barrelFormat(scenario.output.kpis.total_demand)}
+                            ></KPICard>
+                            <KPICard
+                                title="Total Underload"
+                                value={barrelFormat(scenario.output.kpis.total_underload)}
+                            ></KPICard>
+                            <KPICard
+                                title="Total Cost"
+                                value={barrelFormat(scenario.output.kpis.total_product_cost)}
+                            ></KPICard>
                         </div>
-                    </div>
-                    <div className="main-content-container-background">
-                        <div className="main-content-container">
-                            <h3>Scenario name: {scenario.name}</h3>
-                        </div>
-                    </div>
-                    <div className="main-content-container-background">
-                        <div className="main-content-container">
-                            <div className="card-container">
-                                <KPICard
-                                    title="Total Demand"
-                                    value={barrelFormat(scenario.output.kpis.total_demand)}
-                                ></KPICard>
-                                <KPICard
-                                    title="Total Underload"
-                                    value={barrelFormat(scenario.output.kpis.total_underload)}
-                                ></KPICard>
-                                <KPICard
-                                    title="Total Cost"
-                                    value={barrelFormat(scenario.output.kpis.total_product_cost)}
-                                ></KPICard>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="main-content-container-background">
-                        <div className="main-content-container">
-                            <OrderFulfillmentTable orders={scenario.output.orders} />
-                        </div>
-                    </div>
+                    </Section>
+                    <Section>
+                        <StickyHeader>Order Fulfillment</StickyHeader>
+                        <OrderFulfillmentTable orders={scenario.output.orders} />
+                    </Section>
+
                     {/* <div className="main-content-container-background">
                         <div className="main-content-container">
                             <DataTable value={scenario.input.products} header="Products" responsiveLayout="scroll">
@@ -120,13 +113,13 @@ export const ScenarioOutput = () => {
                             </DataTable>
                         </div>
                     </div> */}
-                    {/* <div className="main-content-container-background">
-                        <div className="main-content-container right">
-                            <div className="new-scenario-btn" onClick={handleOptimize}>
-                                Optimize!
+                    <Section>
+                        <div className="right">
+                            <div className="new-scenario-btn" onClick={() => console.log("TBD")}>
+                                Duplicate and edit
                             </div>
                         </div>
-                    </div> */}
+                    </Section>
                 </>
             ) : (
                 "Fetching data"

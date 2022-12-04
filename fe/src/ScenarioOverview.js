@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "./axiosInstance";
 import moment from "moment";
 import { currencyFormat, barrelFormat } from "./formatter";
+import { Section } from "./components/Section";
 
 export const ScenarioOverview = () => {
     const [scenarios, setScenarios] = useState(null);
@@ -50,62 +51,69 @@ export const ScenarioOverview = () => {
         getScenarios();
     }, []);
     return (
-        <div className="main-content-container-background">
-            <div className="main-content-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Scenario name</th>
-                            <th>Optimization time</th>
-                            <th>Demand</th>
-                            <th>Underload</th>
-                            <th>Cost</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {scenarios == null ? (
+        <>
+            <Section>
+                <div className="table-container" style={{ maxHeight: "1400px" }}>
+                    <table>
+                        <thead>
                             <tr>
-                                <td colSpan={5}>"Loading"</td>
+                                <th>Scenario name</th>
+                                <th>Optimization time</th>
+                                <th>Demand</th>
+                                <th>Underload</th>
+                                <th>Cost</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
-                        ) : (
-                            scenarios.map((scenario) => (
-                                <tr key={scenario.scenario_id}>
-                                    <td>
-                                        <Link to={"/scenarios/" + scenario.scenario_id}>{scenario.name}</Link>
-                                    </td>
-                                    <td>{optimizationTime(scenario)}</td>
-                                    <td>{demand(scenario)}</td>
-                                    <td>{underload(scenario)}</td>
-                                    <td>{cost(scenario)}</td>
-                                    <td>{scenario.status}</td>
-                                    <td>
-                                        <span
-                                            className="material-symbols-outlined danger icon outlined"
-                                            alt="Delete"
-                                            onClick={(event) => handleDelete(event, scenario)}
-                                        >
-                                            delete
-                                        </span>
-                                        <span className="material-symbols-outlined accent icon outlined" alt="Edit">
-                                            edit
-                                        </span>
-                                        <span className="material-symbols-outlined accent icon outlined" alt="Favotite">
-                                            favorite
-                                        </span>
-                                    </td>
+                        </thead>
+                        <tbody>
+                            {scenarios == null ? (
+                                <tr>
+                                    <td colSpan={7}>"Loading"</td>
                                 </tr>
-                            ))
-                        )}
-                    </tbody>
-                </table>
-                <div className="main-content-container right">
+                            ) : (
+                                scenarios.map((scenario) => (
+                                    <tr key={scenario.scenario_id}>
+                                        <td>
+                                            <Link to={"/scenarios/" + scenario.scenario_id}>{scenario.name}</Link>
+                                        </td>
+                                        <td>{optimizationTime(scenario)}</td>
+                                        <td>{demand(scenario)}</td>
+                                        <td>{underload(scenario)}</td>
+                                        <td>{cost(scenario)}</td>
+                                        <td>{scenario.status}</td>
+                                        <td>
+                                            <span
+                                                className="material-symbols-outlined danger icon outlined"
+                                                alt="Delete"
+                                                onClick={(event) => handleDelete(event, scenario)}
+                                            >
+                                                delete
+                                            </span>
+                                            <span className="material-symbols-outlined accent icon outlined" alt="Edit">
+                                                edit
+                                            </span>
+                                            <span
+                                                className="material-symbols-outlined accent icon outlined"
+                                                alt="Favorite"
+                                            >
+                                                favorite
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </Section>
+            <Section>
+                <div className="right">
                     <Link to={"/input"}>
                         <div className="new-scenario-btn">New Scenario</div>
                     </Link>
                 </div>
-            </div>
-        </div>
+            </Section>
+        </>
     );
 };

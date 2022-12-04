@@ -16,7 +16,7 @@
     --min-width: 1280px;
     --shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     --comment: #909090;
-    --border-radius: 10px;
+    --border-radius: 5px; //10px;
 }
 
 body {
@@ -56,10 +56,6 @@ table {
     width: 100%;
     margin: 0;
     border-collapse: collapse;
-    background-color: var(--card);
-    border-radius: var(--border-radius) var(--border-radius) 0 0 ;
-    overflow: hidden;
-    box-shadow: var(--shadow);
 
     thead th {
         text-align: left;
@@ -75,10 +71,18 @@ table {
     tr {
         border-bottom: 1px solid var(--background);
     }
+}
 
-    tr:last-of-type {
-        border-bottom: 2px solid var(--primary);
+.table-container {
+    background-color: var(--card);
+    overflow-y: auto;
+    table thead th {
+        position: sticky;
+        top: 0;
     }
+    border-bottom: 2px solid var(--primary);
+    border-radius: var(--border-radius) var(--border-radius) 0 0 ;
+    box-shadow: var(--shadow);
 }
 
 .header-background {
@@ -153,6 +157,7 @@ table {
 .main-content-container {
     width: var(--max-width);
     margin-top: 2em;
+    padding: 1em 0em;
 }
 
 .right {
@@ -198,4 +203,20 @@ table {
     border-radius: var(--border-radius);
     border: none;
     box-shadow: var(--shadow);
+}
+
+
+.section-sticky-header {
+    display: sticky;
+    top: 0;
+    color: var(--primary);
+    font-family: var(--header-family);
+    font-weight: bold;
+    font-size: 1.75em;
+    padding: 0 0 .5em .5em;
+}
+
+.space-between {
+    display: flex;
+    justify-content:space-between;
 }
