@@ -18,6 +18,8 @@
     --shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     --comment: #909090;
     --border-radius: 5px; //10px;
+    --primary-cta: #0099ff;
+    --on-primary-cta: #FFFFFF;
 }
 
 body {
@@ -93,7 +95,7 @@ table {
 }
 
 .header {
-    padding: .5em;
+    padding: 1em;
     display: flex;
     width: var(--max-width);
     justify-content: left;
@@ -171,12 +173,12 @@ table {
     justify-content: right;
 }
 
-.new-scenario-btn {
-    background-color: var(--primary);
-    color: var(--accent);
+.btn {
+    background-color: var(--primary-cta);
+    color: var(--on-primary-cta);
     font-weight: bold;
     padding: .8em 1.2em;
-    border-radius: 50px;
+    border-radius: .5em;
     cursor: pointer;
 }
 

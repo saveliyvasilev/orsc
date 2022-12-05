@@ -51,7 +51,7 @@ export const ScenarioOutput = () => {
 
                     <Section>
                         <div className="right">
-                            <div className="new-scenario-btn" onClick={() => console.log("TBD")}>
+                            <div className="btn" onClick={() => console.log("TBD")}>
                                 [TBD] Duplicate and edit
                             </div>
                         </div>

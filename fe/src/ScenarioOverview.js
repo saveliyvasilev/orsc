@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "./axiosInstance";
 import moment from "moment";
@@ -7,6 +8,7 @@ import { Section } from "./components/Section";
 
 export const ScenarioOverview = () => {
     const [scenarios, setScenarios] = useState(null);
+    const navigate = useNavigate();
 
     function demand(scenario) {
         if (scenario.output === undefined) {
@@ -42,6 +44,9 @@ export const ScenarioOverview = () => {
                 }
             })
             .catch((reason) => console.log(reason));
+    }
+    function handleNewScenario() {
+        navigate("/input", { replace: true });
     }
     useEffect(() => {
         const getScenarios = async () => {
@@ -109,9 +114,9 @@ export const ScenarioOverview = () => {
             </Section>
             <Section>
                 <div className="right">
-                    <Link to={"/input"}>
-                        <div className="new-scenario-btn">New Scenario</div>
-                    </Link>
+                    <div className="btn" onClick={handleNewScenario}>
+                        New Scenario
+                    </div>
                 </div>
             </Section>
         </>

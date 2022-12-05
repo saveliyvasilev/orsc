@@ -99,7 +99,7 @@ export const ScenarioInput = () => {
 
                     <Section>
                         <div className="right">
-                            <div className="new-scenario-btn" onClick={handleOptimize}>
+                            <div className="btn" onClick={handleOptimize}>
                                 Optimize!
                             </div>
                         </div>
