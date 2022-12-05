@@ -220,3 +220,58 @@ table {
     display: flex;
     justify-content:space-between;
 }
+
+.svg-container {
+    // border: 2px solid red;
+
+    display: inline-block;
+    // position: relative;
+    width: 100%;
+    // padding-bottom: 100%;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.svg-content-responsive {
+    // border: 3px solid blue;
+
+    display: inline-block;
+    // position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.svg-primary-fill {
+    fill: var(--accent);
+    stroke: var(--primary);
+    stroke-width: 1%;
+}
+
+
+.svg-comment-stroke {
+    stroke: var(--comment);
+}
+
+.svg-danger-stroke {
+    stroke: var(--danger);
+}
+
+.assay-widget-container {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    .value-container {
+        min-width: 2em;
+        width: 15%;
+        display: flex;
+        overflow: auto;
+        color: var(--comment);
+        align-items: center;
+        justify-items: right;
+    }
+    .svg-container {
+        width: 70%;
+        display: flex;
+        align-items: center;
+    }
+}

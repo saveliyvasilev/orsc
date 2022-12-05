@@ -14,3 +14,10 @@
     border-radius: 10px;
     padding: .2em .8em;
 }
+
+.p-datatable-row-expansion {
+    background-color: var(--background);
+    box-shadow:
+        inset 0px 11px 8px -10px #CCC,
+        inset 0px -11px 8px -10px #CCC;
+}

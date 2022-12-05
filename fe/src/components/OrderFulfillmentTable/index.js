@@ -7,13 +7,19 @@ import { OrderFulfillmentCard } from "./OrderFulfillmentCard";
 export const OrderFulfillmentTable = ({ orders }) => {
     const [expandedRows, setExpandedRows] = useState({});
 
+    const orderFulfillmentCardTemplate = (cardData) => {
+        // This is for plugging a component with a prop called "order"
+        // into the PrimeFaces Table row expansion template
+        return <OrderFulfillmentCard order={cardData}></OrderFulfillmentCard>;
+    };
+
     return (
         <div className="table-container">
             <DataTable
                 value={orders}
                 responsiveLayout="scroll"
                 expandedRows={expandedRows}
-                rowExpansionTemplate={OrderFulfillmentCard}
+                rowExpansionTemplate={orderFulfillmentCardTemplate}
                 onRowToggle={(e) => {
                     setExpandedRows(e.data);
                 }}
@@ -25,7 +31,6 @@ export const OrderFulfillmentTable = ({ orders }) => {
                     if (id in expandedRows) {
                         const copy = { ...expandedRows };
                         delete copy[id];
-                        console.log(copy);
                         setExpandedRows(copy);
                     } else {
                         setExpandedRows({
