@@ -9,6 +9,7 @@
     --secondary-background: var(--primary);
     --on-secondary: var(--background);
     --accent: #F6B26B;
+    --washed-accent: #F6B26B15;
     --danger: #FF5959;
     --header-family: 'Merriweather', serif;
     --normal-family: 'Roboto', sans-serif;
@@ -92,13 +93,17 @@ table {
 }
 
 .header {
-    background-color: var(--secondary-background);
-    padding: 1em;
+    padding: .5em;
     display: flex;
-    vertical-align: middle;
-    max-width: var(--max-width);
-    min-width: var(--min-width);
-
+    width: var(--max-width);
+    justify-content: left;
+    align-items: center;
+    a {
+        display: flex;
+        &:link {
+            text-decoration: none
+        };
+    }
     .title {
         color: var(--on-secondary);
         font-family: var(--header-family);
@@ -111,6 +116,7 @@ table {
 
     .blending-logo {
         color: var(--on-secondary);
+        display: inline-block;
     }
 }
 
@@ -273,5 +279,34 @@ table {
         width: 70%;
         display: flex;
         align-items: center;
+    }
+}
+
+    table tbody tr:hover {
+        background-color: var(--washed-accent);
+    }
+    table tbody tr.p-datatable-row-expansion {
+        // background-color: var(--background);
+        &:hover {
+            background-color: var(--background);
+        }
+    }
+
+.clickable-row-cursor {
+        table tbody tr {
+            cursor: pointer;
+        }
+        table tbody tr.p-datatable-row-expansion {
+            cursor: auto;
+        }
+}
+
+
+.non-clickable-row-cursor {
+    table tr {
+        cursor:auto;
+    }
+    table tr:hover {
+        cursor: auto;
     }
 }

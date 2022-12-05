@@ -14,7 +14,7 @@ export const OrderFulfillmentTable = ({ orders }) => {
     };
 
     return (
-        <div className="table-container">
+        <div className="table-container clickable-row-cursor">
             <DataTable
                 value={orders}
                 responsiveLayout="scroll"

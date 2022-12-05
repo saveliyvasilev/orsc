@@ -17,7 +17,11 @@
 
 .p-datatable-row-expansion {
     background-color: var(--background);
+
     box-shadow:
         inset 0px 11px 8px -10px #CCC,
         inset 0px -11px 8px -10px #CCC;
+    &:hover {
+        background-color: var(--background);
+    }
 }

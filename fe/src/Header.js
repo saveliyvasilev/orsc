@@ -13,13 +13,13 @@ export const Header = () => {
     );
 
     return (
-        <Link to="/">
-            <div className="header-background">
-                <div className="header">
+        <div className="header-background">
+            <div className="header">
+                <Link to="/">
                     <div className="blending-logo">{logo}</div>
-                    <span className="title">Blending Demo</span>
-                </div>
+                    <div className="title">Blending Demo</div>
+                </Link>
             </div>
-        </Link>
+        </div>
     );
 };

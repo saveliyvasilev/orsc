@@ -5,14 +5,14 @@ export const currencyFormat = (value) =>
         style: "currency",
         currency: "USD",
         notation: "compact",
-    }).format(value);
+    }).format(value.toFixed(2));
 
 export const barrelFormat = (value) =>
     new Intl.NumberFormat(locale, {
         notation: "compact",
-    }).format(value);
+    }).format(value.toFixed(2));
 
 export const assayFormat = (value) =>
     new Intl.NumberFormat(locale, {
         notation: "compact",
-    }).format(value);
+    }).format(value.toFixed(2));

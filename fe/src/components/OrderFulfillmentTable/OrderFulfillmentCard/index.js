@@ -3,7 +3,7 @@ import { Column } from "primereact/column";
 import { ColumnGroup } from "primereact/columngroup";
 import { Row } from "primereact/row";
 
-import { assayFormat, barrelFormat, currencyFormat } from "../../../formatter";
+import { barrelFormat, currencyFormat } from "../../../formatter";
 import { OrderAssayChart } from "../../assayCharts/OrderAssayChart";
 import { ProductAssayChart } from "../../assayCharts/ProductAssayChart";
 import { assayRanges } from "../../../config";
@@ -37,7 +37,7 @@ export const OrderFulfillmentCard = ({ order }) => {
     return (
         <div>
             <div className="card-title">{order.order_id}</div>
-            <div className="table-container">
+            <div className="table-container non-clickable-row-cursor">
                 <DataTable value={order.load_details} responsiveLayout="scroll" footerColumnGroup={footerGroup}>
                     <Column field="product_id" header="Product" style={{ width: "12%" }}></Column>
                     <Column
