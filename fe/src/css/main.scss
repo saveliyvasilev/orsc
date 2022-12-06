@@ -1,5 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
+@import "primereact/resources/primereact.min.css";                  //core css
+@import "primeicons/primeicons.css";
 
+.p-inputtext {
+    border: solid 1px var(--primary);
+    font-size: 1.25em;
+    border-radius: 10px;
+    padding: .2em .8em;
+}
+
+.p-datatable-row-expansion {
+    background-color: var(--background);
+
+    box-shadow:
+        inset 0px 11px 8px -10px #CCC,
+        inset 0px -11px 8px -10px #CCC;
+    &:hover {
+        background-color: var(--background);
+    }
+}
 
 :root {
     --card: #FFFFFF;
@@ -11,6 +30,7 @@
     --accent: #F6B26B;
     --washed-accent: #F6B26B15;
     --danger: #FF5959;
+    --good: #2fb33a;
     --header-family: 'Merriweather', serif;
     --normal-family: 'Roboto', sans-serif;
     --max-width: 1280px;
@@ -57,11 +77,9 @@ a:active {
 table {
     table-layout: fixed; // To make the use of 100% of container
     width: 100%;
-    margin: 0;
     border-collapse: collapse;
 
     thead th {
-        text-align: left;
         background-color: var(--primary);
         color: var(--on-primary);
     }
@@ -138,9 +156,6 @@ table {
     font-variation-settings: 'FILL' 1;
 }
 
-.danger {
-    color: var(--danger);
-}
 
 .accent {
     color: var(--accent);
@@ -184,6 +199,22 @@ table {
 
 .comment {
     color: var(--comment);
+}
+.good {
+    color: var(--good);
+}
+.danger {
+    color: var(--danger);
+}
+.primary {
+    color: var(--primary);
+}
+.assay-ranges-text {
+    font-size: smaller;
+    text-align: center;
+    span {
+        padding: .5em;
+    }
 }
 
 .card-container {
@@ -230,27 +261,20 @@ table {
 }
 
 .svg-container {
-    // border: 2px solid red;
-
     display: inline-block;
-    // position: relative;
     width: 100%;
-    // padding-bottom: 100%;
     vertical-align: top;
     overflow: hidden;
 }
 
 .svg-content-responsive {
-    // border: 3px solid blue;
-
     display: inline-block;
-    // position: absolute;
     top: 0;
     left: 0;
 }
 
 .svg-primary-fill {
-    fill: var(--accent);
+    fill: var(--primary);
     stroke: var(--primary);
     stroke-width: 1%;
 }
@@ -260,8 +284,16 @@ table {
     stroke: var(--comment);
 }
 
+.svg-good-stroke {
+    stroke: var(--good);
+}
+
 .svg-danger-stroke {
     stroke: var(--danger);
+}
+
+.order-assay-chart-container {
+    display: block
 }
 
 .assay-widget-container {
@@ -269,16 +301,17 @@ table {
     justify-content: start;
     width: 100%;
     .value-container {
+        display: flex;
         min-width: 2em;
         width: 15%;
-        display: flex;
         overflow: auto;
-        color: var(--comment);
+        color: var(--primary);
+        margin-right:.8em;
         align-items: center;
-        justify-items: right;
+        justify-content: right;
     }
     .svg-container {
-        width: 70%;
+        width: 100%;
         display: flex;
         align-items: center;
     }
@@ -288,12 +321,13 @@ table {
         background-color: var(--washed-accent);
     }
     table tbody tr.p-datatable-row-expansion {
-        // background-color: var(--background);
         &:hover {
             background-color: var(--background);
         }
     }
-
+.bold {
+    font-weight: bold;
+}
 .clickable-row-cursor {
         table tbody tr {
             cursor: pointer;
@@ -311,4 +345,9 @@ table {
     table tr:hover {
         cursor: auto;
     }
+}
+
+.row-header {
+    font-weight: bold;
+    color: var(--comment);
 }

@@ -1,5 +1,4 @@
 import "./css/main.css";
-import "./css/primereact.css";
 import { Routes, Route } from "react-router-dom";
 import { Footer } from "./Footer";
 import { Header } from "./Header";

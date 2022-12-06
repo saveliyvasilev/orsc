@@ -20,7 +20,7 @@ export const ProductAssayChart = ({ orderProductAssay, scaleMin, scaleMax }) => 
             .attr("y2", yCenter)
             .classed("svg-comment-stroke", true)
         svg.append("circle")  // resulting assay value dot
-            .attr("r", 2)
+            .attr("r", 1.5)
             .attr("cx", scale(orderProductAssay.asy_product))
             .attr("cy", yCenter)
             .classed("svg-primary-fill", true)

@@ -1,5 +1,5 @@
 import axios from "./axiosInstance";
-import { prcfg } from "./config";
+import { assayRanges } from "./config";
 import { useState, useEffect } from "react";
 import { assayFormat, barrelFormat, currencyFormat } from "./formatter";
 
@@ -9,6 +9,7 @@ import { InputText } from "primereact/inputtext";
 import { useNavigate } from "react-router-dom";
 import { Section } from "./components/Section";
 import { StickyHeader } from "./components/Section/StickyHeader";
+import { OrderAssayChart } from "./components/assayCharts/OrderAssayChart";
 
 // import { debounce } from "lodash";
 
@@ -62,6 +63,36 @@ export const ScenarioInput = () => {
         return barrelFormat(rowData.amount);
     }
 
+    function orderAPIBodyTemplate(rowData) {
+        return (
+            <OrderAssayChart
+                assayDetail={{
+                    asy_hard_lb: rowData.API_gravity_hard_lb,
+                    asy_soft_lb: rowData.API_gravity_soft_lb,
+                    asy_soft_ub: rowData.API_gravity_soft_ub,
+                    asy_hard_ub: rowData.API_gravity_hard_ub,
+                }}
+                scaleMin={assayRanges.API_gravity.scaleMin}
+                scaleMax={assayRanges.API_gravity.scaleMax}
+            ></OrderAssayChart>
+        );
+    }
+
+    function orderSulfurBodyTemplate(rowData) {
+        return (
+            <OrderAssayChart
+                assayDetail={{
+                    asy_hard_lb: rowData.sulfur_hard_lb,
+                    asy_soft_lb: rowData.sulfur_soft_lb,
+                    asy_soft_ub: rowData.sulfur_soft_ub,
+                    asy_hard_ub: rowData.sulfur_hard_ub,
+                }}
+                scaleMin={assayRanges.sulfur.scaleMin}
+                scaleMax={assayRanges.sulfur.scaleMax}
+            ></OrderAssayChart>
+        );
+    }
+
     // TODO: Refactor this into two (or more) components
     return (
         <>
@@ -76,8 +107,13 @@ export const ScenarioInput = () => {
 
                     <Section>
                         <StickyHeader>Products</StickyHeader>
-                        <div className="table-container" style={{ maxHeight: "30vh" }}>
-                            <DataTable value={sInput.input.products} responsiveLayout="scroll">
+                        <div className="table-container">
+                            <DataTable
+                                value={sInput.input.products}
+                                responsiveLayout="scroll"
+                                // scrollable  // This messes up the column widths, so use container css and scrollHeight to make this work
+                                scrollHeight="60vh"
+                            >
                                 <Column field="product_id" header="Product ID"></Column>
                                 <Column field="reserves" header="Reserves" body={reservesBodyTemplate}></Column>
                                 <Column field="API_gravity" header="API Gravity" body={APIGravityBodyTemplate}></Column>
@@ -89,10 +125,22 @@ export const ScenarioInput = () => {
 
                     <Section>
                         <StickyHeader>Orders</StickyHeader>
-                        <div className="table-container" style={{ maxHeight: "30vh" }}>
-                            <DataTable value={sInput.input.orders} responsiveLayout="scroll">
+                        <div className="table-container">
+                            <DataTable value={sInput.input.orders} responsiveLayout="scroll" scrollHeight="100vh">
                                 <Column field="order_id" header="Order ID"></Column>
                                 <Column field="amount" header="Demand" body={demandBodyTemplate}></Column>
+                                <Column
+                                    header="API"
+                                    style={{ width: "25em" }}
+                                    alignHeader="center"
+                                    body={orderAPIBodyTemplate}
+                                ></Column>
+                                <Column
+                                    header="Sulfur"
+                                    style={{ width: "25em" }}
+                                    alignHeader="center"
+                                    body={orderSulfurBodyTemplate}
+                                ></Column>
                             </DataTable>
                         </div>
                     </Section>

@@ -5,34 +5,43 @@ import axios from "./axiosInstance";
 import moment from "moment";
 import { currencyFormat, barrelFormat } from "./formatter";
 import { Section } from "./components/Section";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
 
 export const ScenarioOverview = () => {
     const [scenarios, setScenarios] = useState(null);
     const navigate = useNavigate();
 
-    function demand(scenario) {
+    function demandTemplate(scenario) {
         if (scenario.output === undefined) {
             return "";
         } else {
             return barrelFormat(scenario.output.kpis.total_demand);
         }
     }
-    function underload(scenario) {
+    function underloadTemplate(scenario) {
         if (scenario.output === undefined) {
             return "";
         } else {
             return barrelFormat(scenario.output.kpis.total_underload);
         }
     }
-    function cost(scenario) {
+    function costTemplate(scenario) {
         if (scenario.output === undefined) {
             return "";
         } else {
             return currencyFormat(scenario.output.kpis.total_product_cost);
         }
     }
-    function optimizationTime(scenario) {
+    function optimizationTimeTemplate(scenario) {
         return moment(scenario.created_at).fromNow();
+    }
+    function statusTemplate(scenario) {
+        if (scenario.output === undefined) {
+            return "";
+        } else {
+            return scenario.status;
+        }
     }
     function handleDelete(event, scenario) {
         event.stopPropagation();
@@ -58,58 +67,39 @@ export const ScenarioOverview = () => {
     return (
         <>
             <Section>
-                <div className="table-container" style={{ maxHeight: "1400px" }}>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Scenario name</th>
-                                <th>Optimization time</th>
-                                <th>Demand</th>
-                                <th>Underload</th>
-                                <th>Cost</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {scenarios == null ? (
-                                <tr>
-                                    <td colSpan={7}>"Loading"</td>
-                                </tr>
-                            ) : (
-                                scenarios.map((scenario) => (
-                                    <tr key={scenario.scenario_id}>
-                                        <td>
-                                            <Link to={"/scenarios/" + scenario.scenario_id}>{scenario.name}</Link>
-                                        </td>
-                                        <td>{optimizationTime(scenario)}</td>
-                                        <td>{demand(scenario)}</td>
-                                        <td>{underload(scenario)}</td>
-                                        <td>{cost(scenario)}</td>
-                                        <td>{scenario.status}</td>
-                                        <td>
-                                            <span
-                                                className="material-symbols-outlined danger icon outlined"
-                                                alt="Delete"
-                                                onClick={(event) => handleDelete(event, scenario)}
-                                            >
-                                                delete
-                                            </span>
-                                            <span className="material-symbols-outlined accent icon outlined" alt="Edit">
-                                                edit
-                                            </span>
-                                            <span
-                                                className="material-symbols-outlined accent icon outlined"
-                                                alt="Favorite"
-                                            >
-                                                favorite
-                                            </span>
-                                        </td>
-                                    </tr>
-                                ))
+                <div className="table-container">
+                    <DataTable value={scenarios} responsiveLayout="scroll" scrollable scrollHeight="70vh">
+                        <Column
+                            header="Scenario name"
+                            field="name"
+                            body={(rowData) => <Link to={"/scenarios/" + rowData.scenario_id}>{rowData.name}</Link>}
+                        />
+                        <Column header="Optimization time" field="created_at" body={optimizationTimeTemplate} />
+                        <Column header="Demand" body={demandTemplate} />
+                        <Column header="Underload" body={underloadTemplate} />
+                        <Column header="Cost" body={costTemplate} />
+                        <Column header="Status" body={statusTemplate} />
+                        <Column
+                            header="Action"
+                            body={(scenario) => (
+                                <>
+                                    <span
+                                        className="material-symbols-outlined danger icon outlined"
+                                        alt="Delete"
+                                        onClick={(event) => handleDelete(event, scenario)}
+                                    >
+                                        delete
+                                    </span>
+                                    <span className="material-symbols-outlined accent icon outlined" alt="Edit">
+                                        edit
+                                    </span>
+                                    <span className="material-symbols-outlined accent icon outlined" alt="Favorite">
+                                        favorite
+                                    </span>
+                                </>
                             )}
-                        </tbody>
-                    </table>
+                        />
+                    </DataTable>
                 </div>
             </Section>
             <Section>

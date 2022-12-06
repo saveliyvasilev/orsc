@@ -12,7 +12,8 @@ export const OrderFulfillmentCard = ({ order }) => {
     let footerGroup = (
         <ColumnGroup>
             <Row>
-                <Column colSpan={3}></Column>
+                <Column colSpan={2}></Column>
+                <Column colSpan={1} footer={() => <span className="row-header">Resulting blend</span>}></Column>
                 <Column
                     footer={() => (
                         <OrderAssayChart
@@ -54,6 +55,8 @@ export const OrderFulfillmentCard = ({ order }) => {
                     ></Column>
                     <Column
                         header="API"
+                        alignHeader="center"
+                        style={{ width: "25%" }}
                         body={(rowData) => {
                             const opa = rowData.order_product_assays.filter((opa) => opa.assay_id === "API_gravity")[0];
                             return (
@@ -67,6 +70,8 @@ export const OrderFulfillmentCard = ({ order }) => {
                     ></Column>
                     <Column
                         header="Sulfur"
+                        alignHeader="center"
+                        style={{ width: "25%" }}
                         body={(rowData) => {
                             const opa = rowData.order_product_assays.filter((opa) => opa.assay_id === "sulfur")[0];
                             return (

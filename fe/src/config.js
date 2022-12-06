@@ -5,11 +5,11 @@ const prcfg = {
 
 const assayRanges = {
     sulfur: {
-        scaleMin: 0.1,
+        scaleMin: 0.07,
         scaleMax: 0.4,
     },
     API_gravity: {
-        scaleMin: 10,
+        scaleMin: 15,
         scaleMax: 50,
     },
 };
