@@ -9,7 +9,7 @@ export const OrdersTable = ({ orders }) => {
         return barrelFormat(rowData.amount);
     }
 
-    function orderAPIBodyTemplate(rowData) {
+    function APIBodyTemplate(rowData) {
         return (
             <OrderAssayChart
                 assayDetail={{
@@ -24,7 +24,7 @@ export const OrdersTable = ({ orders }) => {
         );
     }
 
-    function orderSulfurBodyTemplate(rowData) {
+    function sulfurBodyTemplate(rowData) {
         return (
             <OrderAssayChart
                 assayDetail={{
@@ -44,17 +44,12 @@ export const OrdersTable = ({ orders }) => {
             <DataTable value={orders} responsiveLayout="scroll" scrollHeight="100vh">
                 <Column field="order_id" header="Order ID"></Column>
                 <Column field="amount" header="Demand" body={demandBodyTemplate}></Column>
-                <Column
-                    header="API"
-                    style={{ width: "25em" }}
-                    alignHeader="center"
-                    body={orderAPIBodyTemplate}
-                ></Column>
+                <Column header="API" style={{ width: "25em" }} alignHeader="center" body={APIBodyTemplate}></Column>
                 <Column
                     header="Sulfur"
                     style={{ width: "25em" }}
                     alignHeader="center"
-                    body={orderSulfurBodyTemplate}
+                    body={sulfurBodyTemplate}
                 ></Column>
             </DataTable>
         </div>
