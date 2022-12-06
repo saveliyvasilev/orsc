@@ -40,7 +40,6 @@ export const ScenarioInput = () => {
         });
     }
 
-    // TODO: Refactor this into two (or more) components
     return (
         <>
             {sInput.input !== undefined ? (
