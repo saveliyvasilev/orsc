@@ -1,4 +1,4 @@
-import { assayFormat, barrelFormat, currencyFormat } from "../../formatter";
+import { barrelFormat, currencyFormat } from "../../formatter";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { useState } from "react";

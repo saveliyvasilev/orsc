@@ -24,7 +24,7 @@ export const ProductAssayChart = ({ assayValue, scaleMin, scaleMax }) => {
             .attr("cx", scale(assayValue))
             .attr("cy", yCenter)
             .classed("svg-primary-fill", true)
-    }, []);
+    }, [assayValue]);
 
     return (
         <div className="assay-widget-container">

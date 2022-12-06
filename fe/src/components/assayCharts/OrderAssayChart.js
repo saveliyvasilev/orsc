@@ -60,7 +60,7 @@ export const OrderAssayChart = ({ assayDetail, scaleMin, scaleMax }) => {
             .classed("svg-primary-fill", true)
         }
 
-    }, []);
+    }, [assayDetail]);
 
     return (
         <>

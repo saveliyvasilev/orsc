@@ -6,6 +6,7 @@ export const useD3 = (renderChartFn, dependencies) => {
     const ref = useRef();
 
     useEffect(() => {
+        d3.select(ref.current).selectAll("*").remove(); // Clear svg content before adding new elements
         renderChartFn(d3.select(ref.current));
 
         return () => {};
