@@ -2,7 +2,7 @@ import { useD3 } from "../../hooks/useD3";
 import * as d3 from "d3";
 import { assayFormat } from "../../formatter";
 
-export const ProductAssayChart = ({ orderProductAssay, scaleMin, scaleMax }) => {
+export const ProductAssayChart = ({ assayValue, scaleMin, scaleMax }) => {
     const width = 100;
     const height = 10;
     // prettier-ignore
@@ -21,14 +21,14 @@ export const ProductAssayChart = ({ orderProductAssay, scaleMin, scaleMax }) => 
             .classed("svg-comment-stroke", true)
         svg.append("circle")  // resulting assay value dot
             .attr("r", 1.5)
-            .attr("cx", scale(orderProductAssay.asy_product))
+            .attr("cx", scale(assayValue))
             .attr("cy", yCenter)
             .classed("svg-primary-fill", true)
     }, []);
 
     return (
         <div className="assay-widget-container">
-            <div className="value-container">{assayFormat(orderProductAssay.asy_product)}</div>
+            <div className="value-container">{assayFormat(assayValue)}</div>
             <div className="svg-container">
                 <svg
                     ref={ref}

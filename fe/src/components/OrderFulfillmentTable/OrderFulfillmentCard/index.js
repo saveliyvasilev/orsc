@@ -61,7 +61,7 @@ export const OrderFulfillmentCard = ({ order }) => {
                             const opa = rowData.order_product_assays.filter((opa) => opa.assay_id === "API_gravity")[0];
                             return (
                                 <ProductAssayChart
-                                    orderProductAssay={opa}
+                                    assayValue={opa.asy_product}
                                     scaleMin={assayRanges.API_gravity.scaleMin}
                                     scaleMax={assayRanges.API_gravity.scaleMax}
                                 />
@@ -76,7 +76,7 @@ export const OrderFulfillmentCard = ({ order }) => {
                             const opa = rowData.order_product_assays.filter((opa) => opa.assay_id === "sulfur")[0];
                             return (
                                 <ProductAssayChart
-                                    orderProductAssay={opa}
+                                    assayValue={opa.asy_product}
                                     scaleMin={assayRanges.sulfur.scaleMin}
                                     scaleMax={assayRanges.sulfur.scaleMax}
                                 />
