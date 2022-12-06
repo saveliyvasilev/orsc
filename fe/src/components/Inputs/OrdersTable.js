@@ -42,13 +42,22 @@ export const OrdersTable = ({ orders }) => {
     return (
         <div className="table-container">
             <DataTable value={orders} responsiveLayout="scroll" scrollHeight="100vh">
-                <Column field="order_id" header="Order ID"></Column>
-                <Column field="amount" header="Demand" body={demandBodyTemplate}></Column>
-                <Column header="API" style={{ width: "25em" }} alignHeader="center" body={APIBodyTemplate}></Column>
+                <Column field="order_id" header="Order ID" sortable></Column>
+                <Column field="amount" header="Demand" body={demandBodyTemplate} sortable></Column>
+                <Column
+                    header="API"
+                    style={{ width: "25em" }}
+                    alignHeader="center"
+                    body={APIBodyTemplate}
+                    sortable
+                    sortField="API_gravity_hard_lb"
+                ></Column>
                 <Column
                     header="Sulfur"
                     style={{ width: "25em" }}
                     alignHeader="center"
+                    sortable
+                    sortField="sulfur_hard_lb"
                     body={sulfurBodyTemplate}
                 ></Column>
             </DataTable>
