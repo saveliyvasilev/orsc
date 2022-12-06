@@ -45,7 +45,7 @@ export const OrdersTable = ({ orders }) => {
                 <Column field="order_id" header="Order ID" sortable></Column>
                 <Column field="amount" header="Demand" body={demandBodyTemplate} sortable></Column>
                 <Column
-                    header="API"
+                    header="API Gravity"
                     style={{ width: "25em" }}
                     alignHeader="center"
                     body={APIBodyTemplate}

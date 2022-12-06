@@ -2,24 +2,6 @@
 @import "primereact/resources/primereact.min.css";                  //core css
 @import "primeicons/primeicons.css";
 
-.p-inputtext {
-    border: solid 1px var(--primary);
-    font-size: 1.25em;
-    border-radius: 10px;
-    padding: .2em .8em;
-}
-
-.p-datatable-row-expansion {
-    background-color: var(--background);
-
-    box-shadow:
-        inset 0px 11px 8px -10px #CCC,
-        inset 0px -11px 8px -10px #CCC;
-    &:hover {
-        background-color: var(--background);
-    }
-}
-
 :root {
     --card: #FFFFFF;
     --background: #F0F0F0;
@@ -41,6 +23,28 @@
     --primary-cta: #0099ff;
     --on-primary-cta: #FFFFFF;
 }
+.p-inputtext {
+    border: solid 1px var(--primary);
+    font-size: 1.25em;
+    border-radius: 10px;
+    padding: .2em .8em;
+}
+
+.p-datatable-row-expansion {
+    background-color: var(--background);
+
+    box-shadow:
+        inset 0px 11px 8px -10px #CCC,
+        inset 0px -11px 8px -10px #CCC;
+    &:hover {
+        background-color: var(--background);
+    }
+}
+
+.p-datatable-tfoot {
+    border-top: 2px solid var(--comment);
+}
+
 
 body {
     font-family: var(--normal-family);
@@ -94,6 +98,12 @@ table {
     }
 }
 
+.light-table-header {
+    table thead th {
+        background-color: var(--card);
+        color: var(--primary)
+    }
+}
 .table-container {
     background-color: var(--card);
     overflow-y: auto;
@@ -243,7 +253,18 @@ table {
     border: none;
     box-shadow: var(--shadow);
 }
-
+.order-fulfillment-card-container {
+    padding: 0em 1em 0em 1em;
+    .order-fulfillment-card-title {
+        // font-family: var(--header-family);
+        font-weight: bold;
+        font-size: 1.5em;
+        display: flex;
+        justify-content: left;
+        color: var(--comment);
+        padding: 1em;
+    }
+}
 
 .section-sticky-header {
     display: sticky;

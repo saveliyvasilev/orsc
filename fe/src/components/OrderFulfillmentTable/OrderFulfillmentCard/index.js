@@ -36,55 +36,65 @@ export const OrderFulfillmentCard = ({ order }) => {
         </ColumnGroup>
     );
     return (
-        <div>
-            <div className="card-title">{order.order_id}</div>
-            <div className="table-container non-clickable-row-cursor">
-                <DataTable value={order.load_details} responsiveLayout="scroll" footerColumnGroup={footerGroup}>
-                    <Column field="product_id" header="Product" style={{ width: "12%" }}></Column>
-                    <Column
-                        field="load_amount"
-                        header="Amount"
-                        body={(rowData) => barrelFormat(rowData.load_amount)}
-                        style={{ width: "12%" }}
-                    ></Column>
-                    <Column
-                        field="load_cost"
-                        header="Cost"
-                        body={(rowData) => currencyFormat(rowData.load_cost)}
-                        style={{ width: "12%" }}
-                    ></Column>
-                    <Column
-                        header="API"
-                        alignHeader="center"
-                        style={{ width: "25%" }}
-                        body={(rowData) => {
-                            const opa = rowData.order_product_assays.filter((opa) => opa.assay_id === "API_gravity")[0];
-                            return (
-                                <ProductAssayChart
-                                    assayValue={opa.asy_product}
-                                    scaleMin={assayRanges.API_gravity.scaleMin}
-                                    scaleMax={assayRanges.API_gravity.scaleMax}
-                                />
-                            );
-                        }}
-                    ></Column>
-                    <Column
-                        header="Sulfur"
-                        alignHeader="center"
-                        style={{ width: "25%" }}
-                        body={(rowData) => {
-                            const opa = rowData.order_product_assays.filter((opa) => opa.assay_id === "sulfur")[0];
-                            return (
-                                <ProductAssayChart
-                                    assayValue={opa.asy_product}
-                                    scaleMin={assayRanges.sulfur.scaleMin}
-                                    scaleMax={assayRanges.sulfur.scaleMax}
-                                />
-                            );
-                        }}
-                    ></Column>
-                </DataTable>
-            </div>
+        <div className="order-fulfillment-card-container">
+            {order.load_details.length ? (
+                <>
+                    <div className="order-fulfillment-card-title">{order.order_id} details</div>
+                    <div className="table-container non-clickable-row-cursor light-table-header">
+                        <DataTable value={order.load_details} responsiveLayout="scroll" footerColumnGroup={footerGroup}>
+                            <Column field="product_id" header="Product" style={{ width: "12%" }}></Column>
+                            <Column
+                                field="load_amount"
+                                header="Amount"
+                                body={(rowData) => barrelFormat(rowData.load_amount)}
+                                style={{ width: "12%" }}
+                            ></Column>
+                            <Column
+                                field="load_cost"
+                                header="Cost"
+                                body={(rowData) => currencyFormat(rowData.load_cost)}
+                                style={{ width: "12%" }}
+                            ></Column>
+                            <Column
+                                header="API Gravity"
+                                alignHeader="center"
+                                style={{ width: "25%" }}
+                                body={(rowData) => {
+                                    const opa = rowData.order_product_assays.filter(
+                                        (opa) => opa.assay_id === "API_gravity"
+                                    )[0];
+                                    return (
+                                        <ProductAssayChart
+                                            assayValue={opa.asy_product}
+                                            scaleMin={assayRanges.API_gravity.scaleMin}
+                                            scaleMax={assayRanges.API_gravity.scaleMax}
+                                        />
+                                    );
+                                }}
+                            ></Column>
+                            <Column
+                                header="Sulfur"
+                                alignHeader="center"
+                                style={{ width: "25%" }}
+                                body={(rowData) => {
+                                    const opa = rowData.order_product_assays.filter(
+                                        (opa) => opa.assay_id === "sulfur"
+                                    )[0];
+                                    return (
+                                        <ProductAssayChart
+                                            assayValue={opa.asy_product}
+                                            scaleMin={assayRanges.sulfur.scaleMin}
+                                            scaleMax={assayRanges.sulfur.scaleMax}
+                                        />
+                                    );
+                                }}
+                            ></Column>
+                        </DataTable>
+                    </div>
+                </>
+            ) : (
+                <div className="order-fulfillment-card-title">{order.order_id} not loaded</div>
+            )}
         </div>
     );
 };
