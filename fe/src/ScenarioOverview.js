@@ -37,10 +37,12 @@ export const ScenarioOverview = () => {
         return moment(scenario.created_at).fromNow();
     }
     function statusTemplate(scenario) {
-        if (scenario.output === undefined) {
+        if (scenario.status === undefined) {
             return "";
         } else {
-            return scenario.status;
+            return (
+                <span className={`scenario-status-badge scenario-status-${scenario.status}`}>{scenario.status}</span>
+            );
         }
     }
     function handleDelete(event, scenario) {

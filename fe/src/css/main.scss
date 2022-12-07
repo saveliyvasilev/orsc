@@ -12,7 +12,9 @@
     --accent: #F6B26B;
     --washed-accent: #F6B26B15;
     --danger: #FF5959;
+    --washed-danger: #FF595915;
     --good: #2fb33a;
+    --washed-good: #2fb33a15;
     --header-family: 'Merriweather', serif;
     --normal-family: 'Roboto', sans-serif;
     --max-width: 1280px;
@@ -377,4 +379,25 @@ table {
 .row-header {
     font-weight: bold;
     color: var(--comment);
+}
+
+
+.scenario-status-badge {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: .8em;
+    // letter-spacing: .3px;
+}
+
+.scenario-status-SUCCESS {
+    background-color: var(--washed-good);
+    color: var(--good);
+}
+
+
+.scenario-status-NEW {
+    background-color: var(--washed-accent);
+    color: var(--accent);
 }
