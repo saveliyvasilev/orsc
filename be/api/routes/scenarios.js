@@ -16,7 +16,9 @@ router.get("/:scenario_id", async (request, response) => {
 router.get("/", async (request, response) => {
     console.log("Querying all scenarios");
     try {
-        const scenarios = await BlendingScenario.find({}).sort({ created_at: "desc" });
+        const scenarios = await BlendingScenario.find({})
+            .select("scenario_id name status created_at output.kpis")
+            .sort({ created_at: "desc" });
         response.json(scenarios);
     } catch (err) {
         console.error(err);

@@ -7,11 +7,11 @@ import { currencyFormat, barrelFormat } from "./formatter";
 import { Section } from "./components/Section";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { useInterval } from "./hooks/useInterval";
 
 export const ScenarioOverview = () => {
     const [scenarios, setScenarios] = useState(null);
     const navigate = useNavigate();
-
     function demandTemplate(scenario) {
         if (scenario.output === undefined) {
             return "";
@@ -66,6 +66,16 @@ export const ScenarioOverview = () => {
         };
         getScenarios();
     }, []);
+    useInterval(() => {
+        // TODO: Don't active-poll if it's a very often used app by many users
+        // TODO: Maybe consider doing a separate API tor reduce querying or paginate -- this re-renders on each call.
+        console.log("Polling for scenarios");
+        const getScenarios = async () => {
+            const res = await axios.get("/scenarios");
+            setScenarios(res.data);
+        };
+        getScenarios();
+    }, 5000);
     return (
         <>
             <Section>
