@@ -8,6 +8,8 @@ def kpis(model_output: ModelOutput) -> Dict:
         "total_underload": _total_underload(model_output),
         "total_product_cost": _total_product_cost(model_output),
         # "total_off_spec_orders": _total_off_spec_orders(model_output)
+        "total_initial_product": _total_initial_product(model_output),
+        "total_leftover_product": _total_leftover_product(model_output),
     }
 
 
@@ -25,3 +27,12 @@ def _total_product_cost(model_output: ModelOutput) -> float:
         amount * model_output.model_input.coefficients.product_cost[product]
         for (product, order), amount in load.items()
     )
+
+
+def _total_initial_product(model_output: ModelOutput) -> float:
+    return sum(model_output.model_input.coefficients.product_available.values())
+
+
+def _total_leftover_product(model_output: ModelOutput) -> float:
+    load = model_output.variables.load
+    return _total_initial_product(model_output) - sum(load.values())

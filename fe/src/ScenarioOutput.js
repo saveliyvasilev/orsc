@@ -42,6 +42,14 @@ export const ScenarioOutput = () => {
                                 title="Total Cost"
                                 value={barrelFormat(scenario.output.kpis.total_product_cost)}
                             ></KPICard>
+                            <KPICard
+                                title="Available product"
+                                value={barrelFormat(scenario.output.kpis.total_initial_product)}
+                            ></KPICard>
+                            <KPICard
+                                title="Leftover product"
+                                value={barrelFormat(scenario.output.kpis.total_leftover_product)}
+                            ></KPICard>
                         </div>
                     </Section>
                     <Section>
