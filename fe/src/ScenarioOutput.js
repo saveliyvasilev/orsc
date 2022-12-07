@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { barrelFormat } from "./formatter";
 import { KPICard } from "./components/KPICard";
 import { OrderFulfillmentTable } from "./components/OrderFulfillmentTable";
+import { ProductUsageTable } from "./components/ProductUsageTable";
 
 import { useParams } from "react-router-dom";
 import { Section } from "./components/Section";
@@ -55,6 +56,10 @@ export const ScenarioOutput = () => {
                     <Section>
                         <StickyHeader>Order Fulfillment</StickyHeader>
                         <OrderFulfillmentTable orders={scenario.output.orders} />
+                    </Section>
+                    <Section>
+                        <StickyHeader>Product usage</StickyHeader>
+                        <ProductUsageTable productUsage={scenario.output.product_usage} />
                     </Section>
 
                     <Section>
