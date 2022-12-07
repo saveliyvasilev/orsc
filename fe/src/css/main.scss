@@ -20,7 +20,7 @@
     --shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     --comment: #909090;
     --border-radius: 5px; //10px;
-    --primary-cta: #0099ff;
+    --primary-cta: hsl(204, 80%, 50%);
     --on-primary-cta: #FFFFFF;
 }
 .p-inputtext {
@@ -253,8 +253,14 @@ table {
     border: none;
     box-shadow: var(--shadow);
 }
+.p-datatable-responsive-scroll table thead tr {
+    z-index: 100;  //  NOTE: this z-index is for making the tables contained in another tables (via expanded rows) not to overlap the header of the containing table when scrolling
+    position: relative;
+}
 .order-fulfillment-card-container {
     padding: 0em 1em 0em 1em;
+    position: relative;
+    z-index: 0;
     .order-fulfillment-card-title {
         // font-family: var(--header-family);
         font-weight: bold;

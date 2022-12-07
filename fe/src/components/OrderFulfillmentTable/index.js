@@ -26,6 +26,7 @@ export const OrderFulfillmentTable = ({ orders }) => {
                 dataKey="order_id"
                 sortField="order_id"
                 sortOrder={1}
+                scrollHeight="80vh"
                 onRowClick={(e) => {
                     const id = e.data.order_id;
                     if (id in expandedRows) {

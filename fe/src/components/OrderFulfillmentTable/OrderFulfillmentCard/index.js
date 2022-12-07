@@ -41,7 +41,13 @@ export const OrderFulfillmentCard = ({ order }) => {
                 <>
                     <div className="order-fulfillment-card-title">{order.order_id} details</div>
                     <div className="table-container non-clickable-row-cursor light-table-header">
-                        <DataTable value={order.load_details} responsiveLayout="scroll" footerColumnGroup={footerGroup}>
+                        <DataTable
+                            value={order.load_details}
+                            responsiveLayout="scroll"
+                            footerColumnGroup={footerGroup}
+                            sortField="load_amount"
+                            sortOrder={-1}
+                        >
                             <Column field="product_id" header="Product" style={{ width: "12%" }}></Column>
                             <Column
                                 field="load_amount"
