@@ -1,3 +1,3 @@
 export const StickyHeader = (props) => {
-    return <div className="section-sticky-header">{props.children}</div>;
+    return <div className="section-header">{props.children}</div>;
 };

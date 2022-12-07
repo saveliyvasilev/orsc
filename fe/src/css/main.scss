@@ -191,8 +191,8 @@ table {
 
 .main-content-container {
     width: var(--max-width);
-    margin-top: 2em;
-    padding: 1em 0em;
+    margin: 0; //1em 0 1em 0;
+    padding: 1.5em 0 0 0;
 }
 
 .right {
@@ -320,14 +320,12 @@ table {
     }
 }
 
-.section-sticky-header {
-    display: sticky;
-    top: 0;
+.section-header {
     color: var(--primary);
     font-family: var(--header-family);
     font-weight: bold;
     font-size: 1.75em;
-    padding: 0 0 .5em .5em;
+    padding: 0 0 0em .5em;
 }
 
 .space-between {

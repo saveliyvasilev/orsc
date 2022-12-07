@@ -8,6 +8,7 @@ import { ProductUsageTable } from "./components/ProductUsageTable";
 import { useParams } from "react-router-dom";
 import { Section } from "./components/Section";
 import { StickyHeader } from "./components/Section/StickyHeader";
+import { ScenarioOutputHeader } from "./components/ScenarioOutputHeader";
 
 export const ScenarioOutput = () => {
     const { queryId } = useParams();
@@ -27,7 +28,7 @@ export const ScenarioOutput = () => {
             {scenario.input !== undefined ? (
                 <>
                     <Section>
-                        <StickyHeader>{scenario.name}</StickyHeader>
+                        <ScenarioOutputHeader scenario={scenario}></ScenarioOutputHeader>
                     </Section>
                     <Section>
                         <div className="card-container">
