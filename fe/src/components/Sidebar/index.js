@@ -24,14 +24,14 @@ export const Sidebar = () => {
                 <ul className="navbar-nav">
                     <li className="nav-item">
                         <Link className="nav-link" to="/">
-                            <span class="material-symbols-outlined icon">home</span>
+                            <span className="material-symbols-outlined icon">home</span>
                             <span className="link-text">Home</span>
                         </Link>
                     </li>
 
                     <li className="nav-item">
                         <Link className="nav-link" to="/input">
-                            <span class="material-symbols-outlined icon">add</span>
+                            <span className="material-symbols-outlined icon">add</span>
                             <span className="link-text">New scenario</span>
                         </Link>
                     </li>
