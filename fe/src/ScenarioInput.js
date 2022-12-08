@@ -9,10 +9,12 @@ import { ProductsTable } from "./components/Inputs/ProductsTable";
 import { OrdersTable } from "./components/Inputs/OrdersTable";
 
 // import { debounce } from "lodash";
+import { TabView, TabPanel } from "primereact/tabview";
 
 export const ScenarioInput = () => {
     const [sInput, setSInput] = useState({});
     const navigate = useNavigate();
+    const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
         // TODO: This should call a GET for a fresh data pull and jump to an overview page; not make a new scenario entry via POST
@@ -52,6 +54,17 @@ export const ScenarioInput = () => {
                     </Section>
 
                     <Section>
+                        <TabView renderActiveOnly={false}>
+                            <TabPanel header="Products">
+                                <ProductsTable products={sInput.input.products} />
+                            </TabPanel>
+                            <TabPanel header="Orders">
+                                <OrdersTable orders={sInput.input.orders}></OrdersTable>
+                            </TabPanel>
+                        </TabView>
+                    </Section>
+
+                    {/* <Section>
                         <StickyHeader>Products</StickyHeader>
                         <div className="table-container">
                             <ProductsTable products={sInput.input.products} />
@@ -61,7 +74,7 @@ export const ScenarioInput = () => {
                     <Section>
                         <StickyHeader>Orders</StickyHeader>
                         <OrdersTable orders={sInput.input.orders}></OrdersTable>
-                    </Section>
+                    </Section> */}
 
                     <Section>
                         <div className="right">

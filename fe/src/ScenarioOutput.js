@@ -10,9 +10,12 @@ import { Section } from "./components/Section";
 import { StickyHeader } from "./components/Section/StickyHeader";
 import { ScenarioOutputHeader } from "./components/ScenarioOutputHeader";
 
+import { TabView, TabPanel } from "primereact/tabview";
+
 export const ScenarioOutput = () => {
     const { queryId } = useParams();
     const [scenario, setScenario] = useState({});
+    const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
         console.log(`Retrieving ${queryId}`);
@@ -54,22 +57,31 @@ export const ScenarioOutput = () => {
                             ></KPICard>
                         </div>
                     </Section>
-                    <Section>
+                    {/* <Section>
                         <StickyHeader>Order Fulfillment</StickyHeader>
                         <OrderFulfillmentTable orders={scenario.output.orders} />
                     </Section>
                     <Section>
                         <StickyHeader>Product usage</StickyHeader>
                         <ProductUsageTable productUsage={scenario.output.product_usage} />
-                    </Section>
-
+                    </Section> */}
                     <Section>
+                        <TabView renderActiveOnly={false}>
+                            <TabPanel header="Order Fulfillment">
+                                <OrderFulfillmentTable orders={scenario.output.orders} />
+                            </TabPanel>
+                            <TabPanel header="Product usage">
+                                <ProductUsageTable productUsage={scenario.output.product_usage} />
+                            </TabPanel>
+                        </TabView>{" "}
+                    </Section>
+                    {/* <Section>
                         <div className="right">
                             <div className="btn" onClick={() => console.log("TBD")}>
                                 [TBD] Duplicate and edit
                             </div>
                         </div>
-                    </Section>
+                    </Section> */}
                 </>
             ) : (
                 "Fetching data"

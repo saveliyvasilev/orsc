@@ -52,6 +52,42 @@ $small: 1024px;
 }
 
 
+.p-tabview-nav {
+    padding: 1em;
+    gap: 0em;
+}
+
+.p-tabview-nav-content {
+    padding: 0em 0em;
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: var(--normal-family);
+    background-color: var(--card);
+    border-radius: var(--border-radius);
+    span {
+        color: var(--comment);
+        padding: 0.2em .5em;
+    }
+}
+
+.p-tabview-selected {
+    // font-weight: bold;
+    span {
+        color: var(--primary);
+    }
+    border-bottom: 3px solid var(--primary);
+}
+
+.p-tabview-title {
+    line-height: unset;
+}
+
+
+.p-tabview-title {
+    line-height: unset;
+}
+
+
 body {
     font-family: var(--normal-family);
     background-color: var(--background);
@@ -76,11 +112,11 @@ a:visited {
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 a:active {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 

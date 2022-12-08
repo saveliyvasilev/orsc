@@ -40,7 +40,7 @@ export const ProductsTable = ({ products }) => {
                 value={products}
                 responsiveLayout="scroll"
                 // scrollable  // This messes up the column widths, so use container css and scrollHeight to make this work
-                scrollHeight="90vh"
+                scrollHeight="75vh"
             >
                 <Column field="product_id" header="Product ID" sortable></Column>
                 <Column field="reserves" header="Reserves" body={reservesBodyTemplate} sortable></Column>

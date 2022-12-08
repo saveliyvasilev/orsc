@@ -41,7 +41,7 @@ export const OrdersTable = ({ orders }) => {
 
     return (
         <div className="table-container">
-            <DataTable value={orders} responsiveLayout="scroll" scrollHeight="100vh">
+            <DataTable value={orders} responsiveLayout="scroll" scrollHeight="75vh">
                 <Column field="order_id" header="Order ID" sortable></Column>
                 <Column field="amount" header="Demand" body={demandBodyTemplate} sortable></Column>
                 <Column
