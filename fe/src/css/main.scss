@@ -2,6 +2,8 @@
 @import "primereact/resources/primereact.min.css";                  //core css
 @import "primeicons/primeicons.css";
 
+$small: 1024px;
+
 :root {
     --card: #FFFFFF;
     --background: #F0F0F0;
@@ -24,6 +26,8 @@
     --border-radius: 5px; //10px;
     --primary-cta: hsl(204, 80%, 50%);
     --on-primary-cta: #FFFFFF;
+    --navbar-width: 18rem;
+    --navbar-small-width: 4rem;
 }
 .p-inputtext {
     border: solid 1px var(--primary);
@@ -148,7 +152,7 @@ table {
 
     .blending-logo {
         color: var(--on-secondary);
-        display: inline-block;
+        display: inline;
     }
 }
 
@@ -186,7 +190,11 @@ table {
 .main-content-container-background {
     display: flex;
     justify-content: center;
-    width: 100%;
+    margin-left: calc(var(--navbar-width) + 1em);
+
+    @media (max-width: $small) {
+        margin-left: calc(var(--navbar-small-width)  + 1em);
+    }
 }
 
 .main-content-container {
@@ -444,4 +452,87 @@ table {
 .scenario-status-NEW {
     background-color: var(--washed-accent);
     color: var(--accent);
+}
+
+.sidebar {
+    z-index:900;
+    position: fixed;
+    height: 100vh;
+    color: var(--on-primary);
+    background-color: var(--primary);
+    width: var(--navbar-width);
+    gap: 3em;
+    a {
+        &:link {
+            text-decoration: none
+        };
+    }
+    .logo-title-container {
+        padding: 1em;
+        display: flex;
+        gap: 1em;
+        align-items: center;
+        justify-content: center;
+        .title {
+            color: var(--on-secondary);
+            font-family: var(--header-family);
+            font-size: 1.5em;
+        }
+
+        .blending-logo {
+            color: var(--on-secondary);
+            display: flex;
+            width: 1.5em;
+        }
+    }
+
+    .navbar {
+        margin-top: 4em;
+    }
+
+    .navbar-nav {
+        list-style: none;
+        padding:0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-item {
+        width: 100%;
+        a:hover {
+            color: var(--accent);
+        }
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        height: 3rem;
+        &:hover {
+            background-color: var(--washed-accent)
+        }
+    }
+
+    .link-text {
+        color: var(--on-primary);
+    }
+
+    .icon {
+        color: var(--on-primary);
+    }
+
+
+    @media (max-width: $small) {
+        width: var(--navbar-small-width);
+        .title {
+            display: none;
+        }
+        .link-text {
+            display: none;
+        }
+        .nav-link {
+            justify-content: center;
+        }
+    }
 }

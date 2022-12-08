@@ -80,7 +80,7 @@ export const ScenarioOverview = () => {
         <>
             <Section>
                 <div className="table-container">
-                    <DataTable value={scenarios} responsiveLayout="scroll" scrollable scrollHeight="70vh">
+                    <DataTable value={scenarios} responsiveLayout="scroll" scrollable scrollHeight="85vh">
                         <Column
                             header="Scenario name"
                             field="name"
