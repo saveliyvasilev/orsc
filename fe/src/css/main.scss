@@ -51,26 +51,33 @@ $small: 1024px;
     border-top: 2px solid var(--comment);
 }
 
+.p-tabview-nav-container {
+    border-bottom: 2px solid var(--comment);
+}
+
+.p-tabview {
+    background-color: var(--card);
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow) ;
+}
 
 .p-tabview-nav {
-    padding: .5em;
     gap: 0em;
 }
 
 .p-tabview-nav-content {
-    padding: 0em 0em;
     font-size: 1em;
     font-weight: bold;
     font-family: var(--normal-family);
-    background-color: var(--card);
-    border-radius: var(--border-radius);
     span {
         color: var(--comment);
-        padding: 0.2em .5em;
+        padding: 1em;
     }
 
     .p-tabview-selected {
-        // font-weight: bold;
         span {
             color: var(--primary);
         }
