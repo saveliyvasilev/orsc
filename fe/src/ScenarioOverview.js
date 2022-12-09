@@ -105,8 +105,8 @@ export const ScenarioOverview = () => {
                                     <span className="material-symbols-outlined accent icon outlined" alt="Edit">
                                         edit
                                     </span>
-                                    <span className="material-symbols-outlined accent icon outlined" alt="Favorite">
-                                        favorite
+                                    <span className="material-symbols-outlined accent icon outlined" alt="Star">
+                                        star
                                     </span>
                                 </>
                             )}

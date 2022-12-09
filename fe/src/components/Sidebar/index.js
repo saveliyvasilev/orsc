@@ -17,7 +17,7 @@ export const Sidebar = () => {
             <Link to="/">
                 <div className="logo-title-container">
                     <div className="blending-logo">{logo}</div>
-                    <span className="title">Blending Demo</span>
+                    <span className="title">Blending</span>
                 </div>
             </Link>
             <nav className="navbar">
@@ -25,14 +25,31 @@ export const Sidebar = () => {
                     <li className="nav-item">
                         <Link className="nav-link" to="/">
                             <span className="material-symbols-outlined icon">home</span>
-                            <span className="link-text">Home</span>
+                            <span className="link-text">Overview</span>
                         </Link>
                     </li>
-
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/">
+                            <span className="material-symbols-outlined icon">star</span>
+                            <span className="link-text">Starred</span>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/">
+                            <span className="material-symbols-outlined icon">settings</span>
+                            <span className="link-text">Settings</span>
+                        </Link>
+                    </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/input">
                             <span className="material-symbols-outlined icon">add</span>
                             <span className="link-text">New scenario</span>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/">
+                            <span className="material-symbols-outlined icon">help</span>
+                            <span className="link-text">Help</span>
                         </Link>
                     </li>
                 </ul>
