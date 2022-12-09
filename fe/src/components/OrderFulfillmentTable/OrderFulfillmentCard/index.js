@@ -39,7 +39,7 @@ export const OrderFulfillmentCard = ({ order }) => {
         <div className="order-fulfillment-card-container">
             {order.load_details.length ? (
                 <>
-                    <div className="order-fulfillment-card-title">{order.order_id} details</div>
+                    {/* <div className="order-fulfillment-card-title">{order.order_id} details</div> */}
                     <div className="table-container non-clickable-row-cursor light-table-header">
                         <DataTable
                             value={order.load_details}
