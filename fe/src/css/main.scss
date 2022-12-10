@@ -260,6 +260,11 @@ table {
     padding: .8em 1.2em;
     border-radius: .5em;
     cursor: pointer;
+    border: none;
+}
+
+.btn-above-table {
+    padding: 0 1em 1em 1em;
 }
 
 .comment {
@@ -580,4 +585,75 @@ table {
             justify-content: center;
         }
     }
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap:1em;
+}
+
+.form-field-container {
+    display: flex;
+    flex-direction: column;
+    label {
+        padding: .1em;
+        color: var(--comment);
+    }
+    input {
+        border: solid 1px var(--primary);
+        font-size: 1.25em;
+        border-radius: 10px;
+        padding: .2em .8em;
+    }
+}
+
+.form-field-validation-error {
+    color: var(--danger);
+    // background-color: blue;
+    margin: 0;
+}
+
+
+.modal-background {
+    background-color: rgba(0, 0, 0, 70%);
+    height: 100vh;
+    z-index: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    top:0;
+    left:var(--navbar-width);
+    width: calc(100vw - var(--navbar-width));
+    @media (max-width: $small) {
+        width: calc(100vw - var(--navbar-small-width));
+        left: var(--navbar-small-width);
+    }
+    
+}
+
+.modal-container {
+    background-color: var(--card);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    // padding: 2em;
+}
+
+.modal-header {
+    border-bottom: 2px solid var(--comment);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5em;
+    padding: .3em 1em;
+    .modal-title {
+        // padding: 1em;
+        display: inline-block
+    }
+}
+
+.modal-content {
+    padding:2em;
 }

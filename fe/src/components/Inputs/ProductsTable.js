@@ -5,7 +5,7 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { ProductAssayChart } from "../assayCharts/ProductAssayChart";
 
-export const ProductsTable = ({ products }) => {
+export const ProductsTable = ({ products, onEditClick, onDeleteClick }) => {
     function reservesBodyTemplate(rowData) {
         return barrelFormat(rowData.reserves);
     }
@@ -32,6 +32,14 @@ export const ProductsTable = ({ products }) => {
 
     function costBodyTemplate(rowData) {
         return currencyFormat(rowData.cost);
+    }
+
+    function handleEdit(event, product) {
+        onEditClick(product);
+    }
+
+    function handleDelete(event, product) {
+        onDeleteClick(product);
     }
 
     return (
@@ -61,6 +69,27 @@ export const ProductsTable = ({ products }) => {
                     body={sulfurBodyTemplate}
                     style={{ width: "25em" }}
                 ></Column>
+                <Column
+                    header="Action"
+                    body={(product) => (
+                        <>
+                            <span
+                                className="material-symbols-outlined danger icon outlined"
+                                alt="Delete"
+                                onClick={(event) => handleDelete(event, product)}
+                            >
+                                delete
+                            </span>
+                            <span
+                                className="material-symbols-outlined accent icon outlined"
+                                alt="Edit"
+                                onClick={(event) => handleEdit(event, product)}
+                            >
+                                edit
+                            </span>
+                        </>
+                    )}
+                />
             </DataTable>
         </div>
     );

@@ -6,15 +6,17 @@ import { useNavigate } from "react-router-dom";
 import { Section } from "./components/Section";
 import { StickyHeader } from "./components/Section/StickyHeader";
 import { ProductsTable } from "./components/Inputs/ProductsTable";
+import { NewProductForm } from "./components/Inputs/NewProductForm";
 import { OrdersTable } from "./components/Inputs/OrdersTable";
+import { Modal } from "./components/Modal";
 
 // import { debounce } from "lodash";
 import { TabView, TabPanel } from "primereact/tabview";
 
 export const ScenarioInput = () => {
     const [sInput, setSInput] = useState({});
+    const [displayCreateProductModal, setDisplayCreateProductModal] = useState(false);
     const navigate = useNavigate();
-    const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
         // TODO: This should call a GET for a fresh data pull and jump to an overview page; not make a new scenario entry via POST
@@ -42,6 +44,39 @@ export const ScenarioInput = () => {
         });
     }
 
+    function handleNewProduct(product) {
+        const updatedProducts = [...sInput.input.products, product];
+        setSInput({
+            ...sInput,
+            input: {
+                ...sInput.input,
+                products: updatedProducts,
+            },
+        });
+        handleCreateProductModalClose();
+    }
+
+    function handleProductEditClick(product) {
+        alert("TBC");
+        console.log("Editing a product");
+        console.log(product);
+    }
+
+    function handleDeleteProduct(product) {
+        const filteredProducts = sInput.input.products.filter((prod) => prod.product_id !== product.product_id);
+        setSInput({
+            ...sInput,
+            input: {
+                ...sInput.input,
+                products: filteredProducts,
+            },
+        });
+    }
+
+    function handleCreateProductModalClose() {
+        setDisplayCreateProductModal(false);
+    }
+
     return (
         <>
             {sInput.input !== undefined ? (
@@ -56,7 +91,23 @@ export const ScenarioInput = () => {
                     <Section>
                         <TabView renderActiveOnly={false}>
                             <TabPanel header="Products">
-                                <ProductsTable products={sInput.input.products} />
+                                <div className="right btn-above-table">
+                                    <button className="btn" onClick={() => setDisplayCreateProductModal(true)}>
+                                        Add product
+                                    </button>
+                                </div>
+                                <Modal
+                                    title="Create product"
+                                    display={displayCreateProductModal}
+                                    onClose={handleCreateProductModalClose}
+                                >
+                                    <NewProductForm onCreateNewProduct={handleNewProduct} />
+                                </Modal>
+                                <ProductsTable
+                                    products={sInput.input.products}
+                                    onEditClick={handleProductEditClick}
+                                    onDeleteClick={handleDeleteProduct}
+                                />
                             </TabPanel>
                             <TabPanel header="Orders">
                                 <OrdersTable orders={sInput.input.orders}></OrdersTable>
