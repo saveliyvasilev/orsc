@@ -4,7 +4,7 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { OrderAssayChart } from "../assayCharts/OrderAssayChart";
 
-export const OrdersTable = ({ orders }) => {
+export const OrdersTable = ({ orders, onEditClick, onDeleteClick }) => {
     function demandBodyTemplate(rowData) {
         return barrelFormat(rowData.amount);
     }
@@ -39,6 +39,14 @@ export const OrdersTable = ({ orders }) => {
         );
     }
 
+    function handleEdit(event, order) {
+        onEditClick(order);
+    }
+
+    function handleDelete(event, order) {
+        onDeleteClick(order);
+    }
+
     return (
         <div className="table-container">
             <DataTable value={orders} responsiveLayout="scroll" scrollHeight="75vh">
@@ -60,6 +68,27 @@ export const OrdersTable = ({ orders }) => {
                     sortField="sulfur_hard_lb"
                     body={sulfurBodyTemplate}
                 ></Column>
+                <Column
+                    header="Action"
+                    body={(order) => (
+                        <>
+                            <span
+                                className="material-symbols-outlined danger icon outlined"
+                                alt="Delete"
+                                onClick={(event) => handleDelete(event, order)}
+                            >
+                                delete
+                            </span>
+                            <span
+                                className="material-symbols-outlined accent icon outlined"
+                                alt="Edit"
+                                onClick={(event) => handleEdit(event, order)}
+                            >
+                                edit
+                            </span>
+                        </>
+                    )}
+                />
             </DataTable>
         </div>
     );

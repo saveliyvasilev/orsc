@@ -12,12 +12,17 @@ import { Modal } from "./components/Modal";
 
 // import { debounce } from "lodash";
 import { TabView, TabPanel } from "primereact/tabview";
+import { OrderForm } from "./components/Inputs/OrderForm";
 
 export const ScenarioInput = () => {
     const [sInput, setSInput] = useState({});
     const [displayCreateProductModal, setDisplayCreateProductModal] = useState(false);
     const [displayEditProductModal, setDisplayEditProductModal] = useState(false);
+    const [displayCreateOrderModal, setDisplayCreateOrderModal] = useState(false);
+    const [displayEditOrderModal, setDisplayEditOrderModal] = useState(false);
+
     const [initialProductData, setInitialProductData] = useState({});
+    const [initialOrderData, setInitialOrderData] = useState({});
 
     const navigate = useNavigate();
 
@@ -59,6 +64,18 @@ export const ScenarioInput = () => {
         handleCreateProductModalClose();
     }
 
+    function handleNewOrder(order) {
+        const updatedOrders = [order, ...sInput.input.orders];
+        setSInput({
+            ...sInput,
+            input: {
+                ...sInput.input,
+                orders: updatedOrders,
+            },
+        });
+        handleCreateOrderModalClose();
+    }
+
     function handleEditProduct(product) {
         const updatedProducts = sInput.input.products.map((p) => {
             if (p.product_id === product.product_id) {
@@ -77,18 +94,52 @@ export const ScenarioInput = () => {
         handleEditProductModalClose();
     }
 
+    function handleEditOrder(order) {
+        const updatedOrders = sInput.input.orders.map((o) => {
+            if (o.order_id === order.order_id) {
+                return order;
+            } else {
+                return o;
+            }
+        });
+        setSInput({
+            ...sInput,
+            input: {
+                ...sInput.input,
+                orders: updatedOrders,
+            },
+        });
+        handleEditOrderModalClose();
+    }
+
     function handleProductEditClick(product) {
         setInitialProductData(() => product);
         setDisplayEditProductModal(() => true);
     }
 
-    function handleDeleteProduct(product) {
+    function handleOrderEditClick(order) {
+        setInitialOrderData(() => order);
+        setDisplayEditOrderModal(() => true);
+    }
+
+    function handleDeleteProductClick(product) {
         const filteredProducts = sInput.input.products.filter((prod) => prod.product_id !== product.product_id);
         setSInput({
             ...sInput,
             input: {
                 ...sInput.input,
                 products: filteredProducts,
+            },
+        });
+    }
+
+    function handleDeleteOrderClick(order) {
+        const filteredOrders = sInput.input.orders.filter((ord) => ord.order_id !== order.order_id);
+        setSInput({
+            ...sInput,
+            input: {
+                ...sInput.input,
+                orders: filteredOrders,
             },
         });
     }
@@ -101,6 +152,13 @@ export const ScenarioInput = () => {
         setDisplayEditProductModal(false);
     }
 
+    function handleCreateOrderModalClose() {
+        setDisplayCreateOrderModal(false);
+    }
+
+    function handleEditOrderModalClose() {
+        setDisplayEditOrderModal(false);
+    }
     return (
         <>
             {sInput.input !== undefined ? (
@@ -137,11 +195,34 @@ export const ScenarioInput = () => {
                                 <ProductsTable
                                     products={sInput.input.products}
                                     onEditClick={handleProductEditClick}
-                                    onDeleteClick={handleDeleteProduct}
+                                    onDeleteClick={handleDeleteProductClick}
                                 />
                             </TabPanel>
                             <TabPanel header="Orders">
-                                <OrdersTable orders={sInput.input.orders}></OrdersTable>
+                                <div className="right btn-above-table">
+                                    <button className="btn" onClick={() => setDisplayCreateOrderModal(true)}>
+                                        Add order
+                                    </button>
+                                </div>
+                                <Modal
+                                    title="Create order"
+                                    display={displayCreateOrderModal}
+                                    onClose={handleCreateOrderModalClose}
+                                >
+                                    <OrderForm onSubmit={handleNewOrder} />
+                                </Modal>
+                                <Modal
+                                    title="Edir order"
+                                    display={displayEditOrderModal}
+                                    onClose={handleEditOrderModalClose}
+                                >
+                                    <OrderForm onSubmit={handleEditOrder} initialData={initialOrderData} />
+                                </Modal>
+                                <OrdersTable
+                                    orders={sInput.input.orders}
+                                    onEditClick={handleOrderEditClick}
+                                    onDeleteClick={handleDeleteOrderClick}
+                                ></OrdersTable>
                             </TabPanel>
                         </TabView>
                     </Section>
