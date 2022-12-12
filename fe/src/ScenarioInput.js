@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Section } from "./components/Section";
 import { StickyHeader } from "./components/Section/StickyHeader";
 import { ProductsTable } from "./components/Inputs/ProductsTable";
-import { NewProductForm } from "./components/Inputs/NewProductForm";
+import { ProductForm } from "./components/Inputs/ProductForm";
 import { OrdersTable } from "./components/Inputs/OrdersTable";
 import { Modal } from "./components/Modal";
 
@@ -45,7 +45,7 @@ export const ScenarioInput = () => {
     }
 
     function handleNewProduct(product) {
-        const updatedProducts = [...sInput.input.products, product];
+        const updatedProducts = [product, ...sInput.input.products];
         setSInput({
             ...sInput,
             input: {
@@ -101,7 +101,7 @@ export const ScenarioInput = () => {
                                     display={displayCreateProductModal}
                                     onClose={handleCreateProductModalClose}
                                 >
-                                    <NewProductForm onCreateNewProduct={handleNewProduct} />
+                                    <ProductForm onSubmit={handleNewProduct} />
                                 </Modal>
                                 <ProductsTable
                                     products={sInput.input.products}

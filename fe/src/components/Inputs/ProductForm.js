@@ -1,20 +1,20 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-export const NewProductForm = ({ onCreateNewProduct }) => {
+export const ProductForm = ({ onSubmit, initialData = null }) => {
     const {
         register,
         formState: { errors },
         handleSubmit,
     } = useForm();
 
-    const onSubmit = (product) => {
-        onCreateNewProduct(product);
+    const handleOnSubmit = (product) => {
+        onSubmit(product);
     };
 
     return (
         <div className="modal">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(handleOnSubmit)}>
                 <div className="form-container">
                     <div className="form-field-container">
                         <label>Product ID</label>
