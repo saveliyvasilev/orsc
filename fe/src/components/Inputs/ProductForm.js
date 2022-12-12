@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-export const ProductForm = ({ onSubmit, initialData = null }) => {
+export const ProductForm = ({ onSubmit, initialData = {} }) => {
     const {
         register,
         formState: { errors },
@@ -19,6 +19,7 @@ export const ProductForm = ({ onSubmit, initialData = null }) => {
                     <div className="form-field-container">
                         <label>Product ID</label>
                         <input
+                            {...(initialData.product_id && { readOnly: true, defaultValue: initialData.product_id })}
                             type="text"
                             {...register("product_id", {
                                 required: true,
@@ -32,7 +33,8 @@ export const ProductForm = ({ onSubmit, initialData = null }) => {
                         <label>Reserves</label>
                         <input
                             type="number"
-                            step="0.01"
+                            step="any"
+                            {...(initialData.reserves && { defaultValue: initialData.reserves })}
                             {...register("reserves", {
                                 required: true,
                                 valueAsNumber: true,
@@ -50,7 +52,8 @@ export const ProductForm = ({ onSubmit, initialData = null }) => {
                         <label>Cost</label>
                         <input
                             type="number"
-                            step="0.01"
+                            step="any"
+                            {...(initialData.cost && { defaultValue: initialData.cost })}
                             {...register("cost", {
                                 required: true,
                                 valueAsNumber: true,
@@ -68,7 +71,8 @@ export const ProductForm = ({ onSubmit, initialData = null }) => {
                         <label>API Gravity</label>
                         <input
                             type="number"
-                            step=".5"
+                            step="any"
+                            {...(initialData.API_gravity && { defaultValue: initialData.API_gravity })}
                             {...register("API_gravity", {
                                 required: true,
                                 valueAsNumber: true,
@@ -86,7 +90,8 @@ export const ProductForm = ({ onSubmit, initialData = null }) => {
                         <label>Sulfur</label>
                         <input
                             type="number"
-                            step=".01"
+                            step="any"
+                            {...(initialData.sulfur && { defaultValue: initialData.sulfur })}
                             {...register("sulfur", {
                                 required: true,
                                 valueAsNumber: true,

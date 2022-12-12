@@ -16,6 +16,9 @@ import { TabView, TabPanel } from "primereact/tabview";
 export const ScenarioInput = () => {
     const [sInput, setSInput] = useState({});
     const [displayCreateProductModal, setDisplayCreateProductModal] = useState(false);
+    const [displayEditProductModal, setDisplayEditProductModal] = useState(false);
+    const [initialProductData, setInitialProductData] = useState({});
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -56,10 +59,27 @@ export const ScenarioInput = () => {
         handleCreateProductModalClose();
     }
 
+    function handleEditProduct(product) {
+        const updatedProducts = sInput.input.products.map((p) => {
+            if (p.product_id === product.product_id) {
+                return product;
+            } else {
+                return p;
+            }
+        });
+        setSInput({
+            ...sInput,
+            input: {
+                ...sInput.input,
+                products: updatedProducts,
+            },
+        });
+        handleEditProductModalClose();
+    }
+
     function handleProductEditClick(product) {
-        alert("TBC");
-        console.log("Editing a product");
-        console.log(product);
+        setInitialProductData(() => product);
+        setDisplayEditProductModal(() => true);
     }
 
     function handleDeleteProduct(product) {
@@ -75,6 +95,10 @@ export const ScenarioInput = () => {
 
     function handleCreateProductModalClose() {
         setDisplayCreateProductModal(false);
+    }
+
+    function handleEditProductModalClose() {
+        setDisplayEditProductModal(false);
     }
 
     return (
@@ -102,6 +126,13 @@ export const ScenarioInput = () => {
                                     onClose={handleCreateProductModalClose}
                                 >
                                     <ProductForm onSubmit={handleNewProduct} />
+                                </Modal>
+                                <Modal
+                                    title="Edit product"
+                                    display={displayEditProductModal}
+                                    onClose={handleEditProductModalClose}
+                                >
+                                    <ProductForm onSubmit={handleEditProduct} initialData={initialProductData} />
                                 </Modal>
                                 <ProductsTable
                                     products={sInput.input.products}
