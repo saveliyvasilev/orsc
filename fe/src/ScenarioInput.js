@@ -220,7 +220,7 @@ export const ScenarioInput = () => {
                                     <OrderForm onSubmit={handleNewOrder} />
                                 </Modal>
                                 <Modal
-                                    title="Edir order"
+                                    title="Edit order"
                                     display={displayEditOrderModal}
                                     onClose={handleEditOrderModalClose}
                                 >
