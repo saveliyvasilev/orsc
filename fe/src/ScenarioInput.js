@@ -2,20 +2,19 @@ import axios from "./axiosInstance";
 import { useState, useEffect } from "react";
 
 import { InputText } from "primereact/inputtext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Section } from "./components/Section";
-import { StickyHeader } from "./components/Section/StickyHeader";
 import { ProductsTable } from "./components/Inputs/ProductsTable";
 import { ProductForm } from "./components/Inputs/ProductForm";
 import { OrdersTable } from "./components/Inputs/OrdersTable";
 import { Modal } from "./components/Modal";
 
-// import { debounce } from "lodash";
 import { TabView, TabPanel } from "primereact/tabview";
 import { OrderForm } from "./components/Inputs/OrderForm";
 
 export const ScenarioInput = () => {
     const [sInput, setSInput] = useState({});
+    const { scenario_id } = useParams();
     const [displayCreateProductModal, setDisplayCreateProductModal] = useState(false);
     const [displayEditProductModal, setDisplayEditProductModal] = useState(false);
     const [displayCreateOrderModal, setDisplayCreateOrderModal] = useState(false);
@@ -27,13 +26,22 @@ export const ScenarioInput = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // TODO: This should call a GET for a fresh data pull and jump to an overview page; not make a new scenario entry via POST
-        axios.get("/current-snapshot").then((res) => {
-            if (res.status === 200) {
-                setSInput(res.data);
-            }
-        });
-    }, []);
+        if (scenario_id) {
+            axios.get(`/duplicate-scenario/${scenario_id}`).then((res) => {
+                if (res.status === 200) {
+                    console.log(res.data);
+                    setSInput(res.data);
+                }
+            });
+        } else {
+            axios.get("/current-snapshot").then((res) => {
+                if (res.status === 200) {
+                    console.log(res.data);
+                    setSInput(res.data);
+                }
+            });
+        }
+    }, [scenario_id]);
 
     function handleOptimize(e) {
         e.stopPropagation();
@@ -226,19 +234,6 @@ export const ScenarioInput = () => {
                             </TabPanel>
                         </TabView>
                     </Section>
-
-                    {/* <Section>
-                        <StickyHeader>Products</StickyHeader>
-                        <div className="table-container">
-                            <ProductsTable products={sInput.input.products} />
-                        </div>
-                    </Section>
-
-                    <Section>
-                        <StickyHeader>Orders</StickyHeader>
-                        <OrdersTable orders={sInput.input.orders}></OrdersTable>
-                    </Section> */}
-
                     <Section>
                         <div className="right">
                             <div className="btn" onClick={handleOptimize}>

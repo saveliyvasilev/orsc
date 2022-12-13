@@ -14,8 +14,9 @@ function App() {
             <Sidebar />
             <Routes>
                 <Route path="/" element={<ScenarioOverview />} />
+                <Route path="/input/:scenario_id" element={<ScenarioInput />} />
                 <Route path="/input" element={<ScenarioInput />} />
-                <Route path="/scenarios/:queryId" element={<ScenarioOutput />} />
+                <Route path="/scenarios/:scenario_id" element={<ScenarioOutput />} />
             </Routes>
             <Footer />
         </>

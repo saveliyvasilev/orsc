@@ -56,6 +56,10 @@ export const ScenarioOverview = () => {
             })
             .catch((reason) => console.log(reason));
     }
+    function handleEdit(event, scenario) {
+        event.stopPropagation();
+        navigate(`/input/${scenario.scenario_id}`);
+    }
     function handleNewScenario() {
         navigate("/input", { replace: true });
     }
@@ -102,7 +106,11 @@ export const ScenarioOverview = () => {
                                     >
                                         delete
                                     </span>
-                                    <span className="material-symbols-outlined accent icon outlined" alt="Edit">
+                                    <span
+                                        className="material-symbols-outlined accent icon outlined"
+                                        alt="Edit"
+                                        onClick={(event) => handleEdit(event, scenario)}
+                                    >
                                         edit
                                     </span>
                                     <span className="material-symbols-outlined accent icon outlined" alt="Star">

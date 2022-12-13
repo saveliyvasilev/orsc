@@ -5,27 +5,29 @@ import { KPICard } from "./components/KPICard";
 import { OrderFulfillmentTable } from "./components/OrderFulfillmentTable";
 import { ProductUsageTable } from "./components/ProductUsageTable";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Section } from "./components/Section";
-import { StickyHeader } from "./components/Section/StickyHeader";
 import { ScenarioOutputHeader } from "./components/ScenarioOutputHeader";
 
 import { TabView, TabPanel } from "primereact/tabview";
 
 export const ScenarioOutput = () => {
-    const { queryId } = useParams();
+    const { scenario_id } = useParams();
     const [scenario, setScenario] = useState({});
-    const [activeIndex, setActiveIndex] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(`Retrieving ${queryId}`);
-        axios.get(`/scenarios/${queryId}`).then((res) => {
+        console.log(`Retrieving ${scenario_id}`);
+        axios.get(`/scenarios/${scenario_id}`).then((res) => {
             if (res.status === 200) {
                 setScenario(res.data);
             }
         });
-    }, [queryId]);
+    }, [scenario_id]);
 
+    function handleDuplicateAndEditClick() {
+        navigate(`/input/${scenario_id}`, { replace: true });
+    }
     return (
         <>
             {scenario.input !== undefined ? (
@@ -57,14 +59,6 @@ export const ScenarioOutput = () => {
                             ></KPICard>
                         </div>
                     </Section>
-                    {/* <Section>
-                        <StickyHeader>Order Fulfillment</StickyHeader>
-                        <OrderFulfillmentTable orders={scenario.output.orders} />
-                    </Section>
-                    <Section>
-                        <StickyHeader>Product usage</StickyHeader>
-                        <ProductUsageTable productUsage={scenario.output.product_usage} />
-                    </Section> */}
                     <Section>
                         <TabView renderActiveOnly={false}>
                             <TabPanel header="Order Fulfillment">
@@ -75,13 +69,13 @@ export const ScenarioOutput = () => {
                             </TabPanel>
                         </TabView>{" "}
                     </Section>
-                    {/* <Section>
+                    <Section>
                         <div className="right">
-                            <div className="btn" onClick={() => console.log("TBD")}>
-                                [TBD] Duplicate and edit
+                            <div className="btn" onClick={handleDuplicateAndEditClick}>
+                                Duplicate and edit
                             </div>
                         </div>
-                    </Section> */}
+                    </Section>
                 </>
             ) : (
                 "Fetching data"
