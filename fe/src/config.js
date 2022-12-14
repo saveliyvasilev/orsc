@@ -13,4 +13,8 @@ const assayRanges = {
         scaleMax: 50,
     },
 };
-export { prcfg, assayRanges };
+
+const numeric = {
+    eps: 0.001,
+};
+export { prcfg, assayRanges, numeric };

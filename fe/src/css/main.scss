@@ -489,7 +489,7 @@ table {
 }
 
 
-.scenario-status-badge {
+.status-badge {
     border-radius: 2px;
     padding: .25em .5rem;
     text-transform: uppercase;
@@ -507,6 +507,17 @@ table {
 .scenario-status-NEW {
     background-color: var(--washed-accent);
     color: var(--accent);
+}
+
+.assay-status-OFF-SPEC {
+    background-color: var(--washed-danger);
+    color: var(--danger);
+}
+
+
+.assay-status-ON-SPEC {
+    background-color: var(--washed-good);
+    color: var(--good);
 }
 
 .sidebar {

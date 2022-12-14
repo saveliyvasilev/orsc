@@ -40,9 +40,7 @@ export const ScenarioOverview = () => {
         if (scenario.status === undefined) {
             return "";
         } else {
-            return (
-                <span className={`scenario-status-badge scenario-status-${scenario.status}`}>{scenario.status}</span>
-            );
+            return <span className={`status-badge scenario-status-${scenario.status}`}>{scenario.status}</span>;
         }
     }
     function handleDelete(event, scenario) {

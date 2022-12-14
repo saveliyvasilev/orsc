@@ -3,6 +3,7 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { useState } from "react";
 import { OrderFulfillmentCard } from "./OrderFulfillmentCard";
+import { numeric } from "../../config";
 
 export const OrderFulfillmentTable = ({ orders }) => {
     const [expandedRows, setExpandedRows] = useState({});
@@ -13,6 +14,26 @@ export const OrderFulfillmentTable = ({ orders }) => {
         return <OrderFulfillmentCard order={cardData}></OrderFulfillmentCard>;
     };
 
+    const assayStatusTemplate = (rowData) => {
+        if (Math.abs(rowData.underload_amount - rowData.demand_amount) < numeric.eps) return null;
+        const statusLabel = rowData.has_assay_deviation ? "OFF-SPEC" : "ON-SPEC";
+        return <span className={`status-badge assay-status-${statusLabel}`}>{statusLabel}</span>;
+    };
+
+    const underloadTemplate = (rowData) => {
+        if (rowData.underload_amount === 0) return null;
+        else return barrelFormat(rowData.underload_amount);
+    };
+
+    const loadTemplate = (rowData) => {
+        if (Math.abs(rowData.underload_amount - rowData.demand_amount) < numeric.eps) return null;
+        else return barrelFormat(rowData.load_amount);
+    };
+
+    const costTemplate = (rowData) => {
+        if (Math.abs(rowData.underload_amount - rowData.demand_amount) < numeric.eps) return null;
+        else return currencyFormat(rowData.load_cost);
+    };
     return (
         <div className="table-container clickable-row-cursor">
             <DataTable
@@ -49,30 +70,10 @@ export const OrderFulfillmentTable = ({ orders }) => {
                     sortable
                     body={(rowData) => barrelFormat(rowData.demand_amount)}
                 ></Column>
-                <Column
-                    field="load_amount"
-                    header="Load"
-                    sortable
-                    body={(rowData) => barrelFormat(rowData.load_amount)}
-                ></Column>
-                <Column
-                    field="underload_amount"
-                    header="Underload"
-                    sortable
-                    body={(rowData) => barrelFormat(rowData.underload_amount)}
-                ></Column>
-                <Column
-                    field="has_assay_deviation"
-                    header="Assays"
-                    sortable
-                    body={(rowData) => rowData.has_assay_deviation}
-                ></Column>
-                <Column
-                    field="load_cost"
-                    header="Cost"
-                    sortable
-                    body={(rowData) => currencyFormat(rowData.load_cost)}
-                ></Column>
+                <Column field="load_amount" header="Load" sortable body={loadTemplate}></Column>
+                <Column field="underload_amount" header="Underload" sortable body={underloadTemplate}></Column>
+                <Column field="has_assay_deviation" header="Assays" sortable body={assayStatusTemplate}></Column>
+                <Column field="load_cost" header="Cost" sortable body={costTemplate}></Column>
             </DataTable>
         </div>
     );
