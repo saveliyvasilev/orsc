@@ -17,7 +17,7 @@ export const ProductForm = ({ onSubmit, initialData = {} }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit(handleOnSubmit)}>
+        <form onSubmit={handleSubmit(handleOnSubmit)} autocomplete="off">
             <div className="form-container">
                 <div className="form-field-container">
                     <label>Product ID</label>

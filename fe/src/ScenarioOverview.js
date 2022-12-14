@@ -96,7 +96,7 @@ export const ScenarioOverview = () => {
                         <Column
                             header="Action"
                             body={(scenario) => (
-                                <>
+                                <div class="no-overflow">
                                     <span
                                         className="material-symbols-outlined danger icon outlined"
                                         alt="Delete"
@@ -114,7 +114,7 @@ export const ScenarioOverview = () => {
                                     <span className="material-symbols-outlined accent icon outlined" alt="Star">
                                         star
                                     </span>
-                                </>
+                                </div>
                             )}
                         />
                     </DataTable>

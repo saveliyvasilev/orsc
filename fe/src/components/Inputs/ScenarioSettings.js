@@ -20,7 +20,7 @@ export const ScenarioSettings = ({ scenarioSettings, onSubmit }) => {
     }
 
     return (
-        <form>
+        <form autocomplete="off">
             <div className="center">
                 <div className="form-container objective-function-form-container">
                     {myNumericTemplate("Underload cost (per unit)", "underload_cost")}
@@ -29,9 +29,6 @@ export const ScenarioSettings = ({ scenarioSettings, onSubmit }) => {
                         "API_gravity_deviation_cost"
                     )}
                     {myNumericTemplate("Sulfur deviation cost (per unit x assay deviation)", "sulfur_deviation_cost")}
-                    {/* <div className="right">
-                    <input type="submit" value="Submit" className="btn"></input>
-                </div> */}
                 </div>
             </div>
         </form>

@@ -41,12 +41,6 @@ export const Sidebar = () => {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/input">
-                            <span className="material-symbols-outlined icon">add</span>
-                            <span className="link-text">New scenario</span>
-                        </Link>
-                    </li>
-                    <li className="nav-item">
                         <Link className="nav-link" to="/">
                             <span className="material-symbols-outlined icon">help</span>
                             <span className="link-text">Help</span>

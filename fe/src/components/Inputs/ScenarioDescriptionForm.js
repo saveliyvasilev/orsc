@@ -14,7 +14,7 @@ export const ScenarioDescriptionForm = ({ onSubmit, name = "" }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit(handleOnSubmit)}>
+        <form onSubmit={handleSubmit(handleOnSubmit)} autocomplete="off">
             <div className="form-container">
                 <div className="form-field-container">
                     <label>Scenario name</label>

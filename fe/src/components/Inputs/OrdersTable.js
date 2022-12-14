@@ -71,7 +71,7 @@ export const OrdersTable = ({ orders, onEditClick, onDeleteClick }) => {
                 <Column
                     header="Action"
                     body={(order) => (
-                        <>
+                        <div class="no-overflow">
                             <span
                                 className="material-symbols-outlined danger icon outlined"
                                 alt="Delete"
@@ -86,7 +86,7 @@ export const OrdersTable = ({ orders, onEditClick, onDeleteClick }) => {
                             >
                                 edit
                             </span>
-                        </>
+                        </div>
                     )}
                 />
             </DataTable>

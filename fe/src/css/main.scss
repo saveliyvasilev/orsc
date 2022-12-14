@@ -713,3 +713,8 @@ table {
     display: flex;
     justify-content: center;
 }
+
+.no-overflow {
+    display: flex;
+    min-width: 0;
+}
