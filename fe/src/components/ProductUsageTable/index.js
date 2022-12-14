@@ -1,4 +1,4 @@
-import { percentFormat } from "../../formatter";
+import { barrelFormat, percentFormat } from "../../formatter";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { useState } from "react";
@@ -77,6 +77,20 @@ export const ProductUsageTable = ({ productUsage }) => {
                     sortable
                     body={sulfurBodyTemplate}
                     style={{ width: "25em" }}
+                ></Column>
+                <Column
+                    field="reserves"
+                    header="Reserves"
+                    sortable
+                    align={"right"}
+                    body={(rowData) => barrelFormat(rowData.reserves, 0)}
+                ></Column>
+                <Column
+                    field="loaded"
+                    header="Loaded"
+                    sortable
+                    align={"right"}
+                    body={(rowData) => barrelFormat(rowData.loaded, 0)}
                 ></Column>
                 <Column
                     field="usage_share"
