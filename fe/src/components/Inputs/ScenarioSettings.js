@@ -20,7 +20,7 @@ export const ScenarioSettings = ({ scenarioSettings, onSubmit }) => {
     }
 
     return (
-        <form autocomplete="off">
+        <form autoComplete="off">
             <div className="center">
                 <div className="form-container objective-function-form-container">
                     {myNumericTemplate("Underload cost (per unit)", "underload_cost")}

@@ -18,7 +18,7 @@ export const OrderForm = ({ onSubmit, initialData = {} }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit(handleOnSubmit)} autocomplete="off">
+        <form onSubmit={handleSubmit(handleOnSubmit)} autoComplete="off">
             <div className="form-container order-form-container">
                 <div className="form-field-container">
                     <label>Order ID</label>
