@@ -1,7 +1,6 @@
 import axios from "./axiosInstance";
 import { useState, useEffect } from "react";
 
-import { InputText } from "primereact/inputtext";
 import { useNavigate, useParams } from "react-router-dom";
 import { Section } from "./components/Section";
 import { ProductsTable } from "./components/Inputs/ProductsTable";

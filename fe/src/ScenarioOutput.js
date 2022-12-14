@@ -67,7 +67,7 @@ export const ScenarioOutput = () => {
                             <TabPanel header="Product usage">
                                 <ProductUsageTable productUsage={scenario.output.product_usage} />
                             </TabPanel>
-                        </TabView>{" "}
+                        </TabView>
                     </Section>
                     <Section>
                         <div className="right">

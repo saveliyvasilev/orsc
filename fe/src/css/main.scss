@@ -248,15 +248,7 @@ table {
     padding: 1.5em 0 0 0;
 }
 
-.right {
-    display: flex;
-    justify-content: right;
-}
 
-.center {
-    display: flex;
-    justify-content: center;
-}
 
 .btn {
     background-color: var(--primary-cta);
@@ -297,6 +289,7 @@ table {
     justify-content: left;
     gap: 2em;
 }
+
 .card {
     padding: 1em;
     background-color:var(--card);
@@ -313,6 +306,11 @@ table {
         font-size: 3em;
         display: flex;
         justify-content: center;
+    }
+    .card-content  {
+        display: flex;
+        justify-content: center;
+        padding:1em;
     }
     border-radius: var(--border-radius);
     border: none;
@@ -361,11 +359,11 @@ table {
     .order-fulfillment-card-title {
         // font-family: var(--header-family);
         font-weight: bold;
-        font-size: 1.5em;
+        font-size: 1.2em;
         display: flex;
         justify-content: left;
         color: var(--comment);
-        padding: 0em;
+        padding-bottom: 1em;
     }
 }
 .product-usage-card-container {
@@ -429,7 +427,7 @@ table {
 }
 
 .order-assay-chart-container {
-    display: block
+    width: 100%;
 }
 
 .assay-widget-container {
@@ -704,4 +702,14 @@ table {
     padding: 2em 5em;
     width: 37em;
     margin-bottom: 1em;
+}
+
+.right {
+    display: flex;
+    justify-content: right;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
 }

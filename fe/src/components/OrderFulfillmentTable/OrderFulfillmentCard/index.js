@@ -7,6 +7,7 @@ import { barrelFormat, currencyFormat } from "../../../formatter";
 import { OrderAssayChart } from "../../assayCharts/OrderAssayChart";
 import { ProductAssayChart } from "../../assayCharts/ProductAssayChart";
 import { assayRanges } from "../../../config";
+import { Card } from "../../Card";
 
 export const OrderFulfillmentCard = ({ order }) => {
     let footerGroup = (
@@ -99,7 +100,31 @@ export const OrderFulfillmentCard = ({ order }) => {
                     </div>
                 </>
             ) : (
-                <div className="order-fulfillment-card-title">{order.order_id} not loaded</div>
+                <>
+                    <div className="order-fulfillment-card-title">Required specs</div>
+                    <div className="card-container center">
+                        <Card title="API Gravity" style={{ width: "40%" }}>
+                            <OrderAssayChart
+                                assayDetail={{
+                                    ...order.assay_details.filter((ad) => ad.assay_id === "API_gravity")[0],
+                                    resulting_assay: undefined,
+                                }}
+                                scaleMin={assayRanges.API_gravity.scaleMin}
+                                scaleMax={assayRanges.API_gravity.scaleMax}
+                            ></OrderAssayChart>
+                        </Card>
+                        <Card title="Sulfur" style={{ width: "40%" }}>
+                            <OrderAssayChart
+                                assayDetail={{
+                                    ...order.assay_details.filter((ad) => ad.assay_id === "sulfur")[0],
+                                    resulting_assay: undefined,
+                                }}
+                                scaleMin={assayRanges.sulfur.scaleMin}
+                                scaleMax={assayRanges.sulfur.scaleMax}
+                            ></OrderAssayChart>
+                        </Card>
+                    </div>
+                </>
             )}
         </div>
     );
