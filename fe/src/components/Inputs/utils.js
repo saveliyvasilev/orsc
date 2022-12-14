@@ -6,7 +6,7 @@ export function numericTemplate(label, field, initialData, errors, register, sub
                 type="number"
                 {...(submitOnBlur && { onBlurCapture: submitOnBlur })}
                 step="any"
-                {...(initialData[field] && { defaultValue: initialData[field] })}
+                {...(initialData[field] !== undefined && { defaultValue: initialData[field] })}
                 {...register(field, {
                     required: true,
                     valueAsNumber: true,
