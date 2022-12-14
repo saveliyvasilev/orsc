@@ -72,7 +72,7 @@ export const ProductsTable = ({ products, onEditClick, onDeleteClick }) => {
                 <Column
                     header="Action"
                     body={(product) => (
-                        <div class="no-overflow">
+                        <div className="no-overflow">
                             <span
                                 className="material-symbols-outlined danger icon outlined"
                                 alt="Delete"

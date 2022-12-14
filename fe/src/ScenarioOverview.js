@@ -96,7 +96,7 @@ export const ScenarioOverview = () => {
                         <Column
                             header="Action"
                             body={(scenario) => (
-                                <div class="no-overflow">
+                                <div className="no-overflow">
                                     <span
                                         className="material-symbols-outlined danger icon outlined"
                                         alt="Delete"

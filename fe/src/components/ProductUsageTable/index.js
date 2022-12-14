@@ -68,7 +68,7 @@ export const ProductUsageTable = ({ productUsage }) => {
                     alignHeader="center"
                     sortable
                     body={APIGravityBodyTemplate}
-                    style={{ width: "25em" }}
+                    style={{ width: "18em" }}
                 ></Column>
                 <Column
                     field="sulfur"
@@ -76,7 +76,7 @@ export const ProductUsageTable = ({ productUsage }) => {
                     header="Sulfur"
                     sortable
                     body={sulfurBodyTemplate}
-                    style={{ width: "25em" }}
+                    style={{ width: "18em" }}
                 ></Column>
                 <Column
                     field="reserves"
