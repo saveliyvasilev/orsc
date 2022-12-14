@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-
+import { numericTemplate } from "./utils";
 export const ProductForm = ({ onSubmit, initialData = {} }) => {
     const {
         register,
@@ -11,6 +11,10 @@ export const ProductForm = ({ onSubmit, initialData = {} }) => {
     const handleOnSubmit = (product) => {
         onSubmit(product);
     };
+
+    function myNumericTemplate(label, field) {
+        return numericTemplate(label, field, initialData, errors, register);
+    }
 
     return (
         <form onSubmit={handleSubmit(handleOnSubmit)}>
@@ -28,80 +32,10 @@ export const ProductForm = ({ onSubmit, initialData = {} }) => {
                         <p className="form-field-validation-error">Required field</p>
                     )}
                 </div>
-                <div className="form-field-container">
-                    <label>Reserves</label>
-                    <input
-                        type="number"
-                        step="any"
-                        {...(initialData.reserves && { defaultValue: initialData.reserves })}
-                        {...register("reserves", {
-                            required: true,
-                            valueAsNumber: true,
-                            min: 0,
-                        })}
-                    />
-                    {errors.reserves?.type === "required" && (
-                        <p className="form-field-validation-error">Required field</p>
-                    )}
-                    {errors.reserves?.type === "min" && (
-                        <p className="form-field-validation-error">Value must be positive</p>
-                    )}
-                </div>
-                <div className="form-field-container">
-                    <label>Cost</label>
-                    <input
-                        type="number"
-                        step="any"
-                        {...(initialData.cost && { defaultValue: initialData.cost })}
-                        {...register("cost", {
-                            required: true,
-                            valueAsNumber: true,
-                            min: 0,
-                        })}
-                    />
-                    {errors.cost?.type === "required" && <p className="form-field-validation-error">Required field</p>}
-                    {errors.cost?.type === "min" && (
-                        <p className="form-field-validation-error">Value must be positive</p>
-                    )}
-                </div>
-                <div className="form-field-container">
-                    <label>API Gravity</label>
-                    <input
-                        type="number"
-                        step="any"
-                        {...(initialData.API_gravity && { defaultValue: initialData.API_gravity })}
-                        {...register("API_gravity", {
-                            required: true,
-                            valueAsNumber: true,
-                            min: 0,
-                        })}
-                    />
-                    {errors.API_gravity?.type === "required" && (
-                        <p className="form-field-validation-error">Required field</p>
-                    )}
-                    {errors.API_gravity?.type === "min" && (
-                        <p className="form-field-validation-error">Value must be positive</p>
-                    )}
-                </div>
-                <div className="form-field-container">
-                    <label>Sulfur</label>
-                    <input
-                        type="number"
-                        step="any"
-                        {...(initialData.sulfur && { defaultValue: initialData.sulfur })}
-                        {...register("sulfur", {
-                            required: true,
-                            valueAsNumber: true,
-                            min: 0,
-                        })}
-                    />
-                    {errors.sulfur?.type === "required" && (
-                        <p className="form-field-validation-error">Required field</p>
-                    )}
-                    {errors.sulfur?.type === "min" && (
-                        <p className="form-field-validation-error">Value must be positive</p>
-                    )}
-                </div>
+                {myNumericTemplate("Reserves", "reserves")}
+                {myNumericTemplate("Cost", "cost")}
+                {myNumericTemplate("API Gravity", "API_gravity")}
+                {myNumericTemplate("Sulfur", "sulfur")}
                 <div className="right">
                     <input type="submit" value="Submit" className="btn"></input>
                 </div>

@@ -9,6 +9,7 @@ from .coefficients import (
     AsyHardUBFactory,
     ProductAsyFactory,
     AsyDeviationCostFactory,
+    UnderloadCostFactory,
 )
 
 import pandas as pd
@@ -126,19 +127,27 @@ class JSONProductAsyFactory(ProductAsyFactory):
 
 
 class JSONAsyDeviationCostFactory(AsyDeviationCostFactory):
-    def __init__(self, assays: Set[str]) -> None:
+    def __init__(self, assays: Set[str], scenario_settings: Dict[str, float]) -> None:
         super().__init__()
         self._assays = assays
+        self._scenario_settings = scenario_settings
 
     def build(self) -> Dict[str, float]:
-        # TODO: Hardcoded
-        base_penalty = 10.0
-        hardcoded_penalties = {
-            "API_gravity": base_penalty,
-            "sulfur": base_penalty * 161,
-        }  # the 161 is to adjusto for magnitude in deviations between sulfur and API_gravity
-        if set(hardcoded_penalties.keys()) != self._assays:
+        penalties = {
+            "API_gravity": self._scenario_settings["API_gravity_deviation_cost"],
+            "sulfur": self._scenario_settings["sulfur_deviation_cost"],
+        }
+        if set(penalties.keys()) != self._assays:
             raise ValueError(
                 "Something is wrong with hardcoded data, missing or excess assay types"
             )
-        return hardcoded_penalties
+        return penalties
+
+
+class JSONUnderloadCostFactory(UnderloadCostFactory):
+    def __init__(self, scenario_settings: Dict[str, float]) -> None:
+        super().__init__()
+        self._scenario_settings = scenario_settings
+
+    def build(self) -> float:
+        return self._scenario_settings["underload_cost"]

@@ -9,6 +9,12 @@ router.get("/", (req, res) => {
     // systems, so might be a good idea to refactor it a bit in order to avoid
     // rabbit holes.
 
+    const defaultScenarioSettings = {
+        API_gravity_deviation_cost: 1,
+        sulfur_deviation_cost: 161,
+        underload_cost: 100,
+    };
+
     // Reading the manual excel file -- note that this file can be mounted via docker
     console.log("Current directory: " + process.cwd());
     const file = reader.readFile("./data/input_data.xlsx");
@@ -18,7 +24,9 @@ router.get("/", (req, res) => {
         name: `New scenario`,
         status: "NEW",
         created_at: new Date(),
-        input: {},
+        input: {
+            scenario_settings: defaultScenarioSettings,
+        },
     };
 
     const sheets = file.SheetNames;

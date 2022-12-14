@@ -12,6 +12,7 @@ import { Modal } from "./components/Modal";
 import { TabView, TabPanel } from "primereact/tabview";
 import { OrderForm } from "./components/Inputs/OrderForm";
 import { ScenarioDescriptionForm } from "./components/Inputs/ScenarioDescriptionForm";
+import { ScenarioSettings } from "./components/Inputs/ScenarioSettings";
 
 export const ScenarioInput = () => {
     const [sInput, setSInput] = useState({});
@@ -31,14 +32,14 @@ export const ScenarioInput = () => {
         if (scenario_id) {
             axios.get(`/duplicate-scenario/${scenario_id}`).then((res) => {
                 if (res.status === 200) {
-                    console.log(res.data);
+                    console.log("Created scenario based on another scenario");
                     setSInput(res.data);
                 }
             });
         } else {
             axios.get("/current-snapshot").then((res) => {
                 if (res.status === 200) {
-                    console.log(res.data);
+                    console.log("Got fresh snapshot");
                     setSInput(res.data);
                 }
             });
@@ -121,6 +122,16 @@ export const ScenarioInput = () => {
             name: name,
         });
         handleEditScenarioDescriptionModalClose();
+    }
+
+    function handleEditScenarioSettings(scenarioSettings) {
+        setSInput({
+            ...sInput,
+            input: {
+                ...sInput.input,
+                scenario_settings: scenarioSettings,
+            },
+        });
     }
 
     function handleEditScenarioDescriptionClick() {
@@ -209,9 +220,9 @@ export const ScenarioInput = () => {
                         <TabView renderActiveOnly={false}>
                             <TabPanel header="Products">
                                 <div className="right btn-above-table">
-                                    <button className="btn" onClick={() => setDisplayCreateProductModal(true)}>
+                                    <div className="btn" onClick={() => setDisplayCreateProductModal(true)}>
                                         Add product
-                                    </button>
+                                    </div>
                                 </div>
                                 <Modal
                                     title="Create product"
@@ -235,9 +246,9 @@ export const ScenarioInput = () => {
                             </TabPanel>
                             <TabPanel header="Orders">
                                 <div className="right btn-above-table">
-                                    <button className="btn" onClick={() => setDisplayCreateOrderModal(true)}>
+                                    <div className="btn" onClick={() => setDisplayCreateOrderModal(true)}>
                                         Add order
-                                    </button>
+                                    </div>
                                 </div>
                                 <Modal
                                     title="Create order"
@@ -258,6 +269,12 @@ export const ScenarioInput = () => {
                                     onEditClick={handleOrderEditClick}
                                     onDeleteClick={handleDeleteOrderClick}
                                 ></OrdersTable>
+                            </TabPanel>
+                            <TabPanel header="Settings">
+                                <ScenarioSettings
+                                    scenarioSettings={sInput.input.scenario_settings}
+                                    onSubmit={handleEditScenarioSettings}
+                                />
                             </TabPanel>
                         </TabView>
                     </Section>

@@ -253,6 +253,11 @@ table {
     justify-content: right;
 }
 
+.center {
+    display: flex;
+    justify-content: center;
+}
+
 .btn {
     background-color: var(--primary-cta);
     color: var(--on-primary-cta);
@@ -682,4 +687,10 @@ table {
 
 .order-form-container {
     width: 30vw;
+}
+
+.objective-function-form-container {
+    padding: 2em 5em;
+    width: 37em;
+    margin-bottom: 1em;
 }

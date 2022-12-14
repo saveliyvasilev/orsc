@@ -51,8 +51,8 @@ def _has_assay_deviation(model_output: ModelOutput, order: str) -> bool:
         for (_order, _), dev in model_output.variables.asy_deviation_above.items()
         if _order == order
     )
-    assert deviation_below >= 0, "Somehow the assay deviation is negative"
-    assert deviation_above >= 0, "Somehow the assay deviation is negative"
+    assert deviation_below >= -EPSILON, "Somehow the assay deviation is negative"
+    assert deviation_above >= -EPSILON, "Somehow the assay deviation is negative"
     return deviation_above + deviation_below > EPSILON
 
 

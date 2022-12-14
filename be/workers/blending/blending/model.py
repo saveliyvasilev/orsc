@@ -121,7 +121,7 @@ class BlendingModel:
         """Build the obj function here."""
 
         product_cost = pl.lpSum(
-            self.vars.load[p, o]
+            self.vars.load[p, o] * self.input.coefficients.product_cost[p]
             for p in self.input.sets.products
             for o in self.input.sets.orders
         )
@@ -137,7 +137,10 @@ class BlendingModel:
             for o in self.input.sets.orders
             for a in self.input.sets.assays
         )
-        underload = pl.lpSum(self.vars.underload[o] for o in self.input.sets.orders)
+        underload = pl.lpSum(
+            self.vars.underload[o] * self.input.coefficients.underload_cost
+            for o in self.input.sets.orders
+        )
         self.objective_function = ObjectiveFunction(
             product_cost=product_cost,
             underload=underload,

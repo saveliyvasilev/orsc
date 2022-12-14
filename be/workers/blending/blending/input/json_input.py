@@ -11,6 +11,7 @@ from .json_coefficients import (
     JSONProductAsyFactory,
     JSONProductAvailableFactory,
     JSONProductCostFactory,
+    JSONUnderloadCostFactory,
 )
 from ..model_types import ModelInput
 from .sets import SetFactory
@@ -26,6 +27,7 @@ class JSONInputFactory:
     def build(self) -> ModelInput:
         products = self._input_data["products"]
         orders = self._input_data["orders"]
+        scenario_settings = self._input_data["scenario_settings"]
         sets = SetFactory(
             products_factory=JSONProductsFactory(products),
             orders_factory=JSONOrdersFactory(orders),
@@ -42,6 +44,9 @@ class JSONInputFactory:
                 asy_soft_ub_factory=JSONAsySoftUBFactory(sets.assays, orders),
                 asy_hard_ub_factory=JSONAsyHardUBFactory(sets.assays, orders),
                 product_asy_factory=JSONProductAsyFactory(sets.assays, products),
-                asy_deviation_cost_factory=JSONAsyDeviationCostFactory(sets.assays),
+                asy_deviation_cost_factory=JSONAsyDeviationCostFactory(
+                    sets.assays, scenario_settings
+                ),
+                underload_cost_factory=JSONUnderloadCostFactory(scenario_settings),
             ).build(),
         )

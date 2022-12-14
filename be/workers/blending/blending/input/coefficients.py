@@ -60,6 +60,12 @@ class AsyDeviationCostFactory(ABC):
         pass
 
 
+class UnderloadCostFactory(ABC):
+    @abstractmethod
+    def build(self) -> float:
+        pass
+
+
 class CoefficientsFactory:
     def __init__(
         self,
@@ -72,6 +78,7 @@ class CoefficientsFactory:
         asy_hard_ub_factory: AsyHardUBFactory,
         product_asy_factory: ProductAsyFactory,
         asy_deviation_cost_factory: AsyDeviationCostFactory,
+        underload_cost_factory: UnderloadCostFactory,
     ) -> None:
         self._product_cost_factory = product_cost_factory
         self._product_available_factory = product_available_factory
@@ -82,6 +89,7 @@ class CoefficientsFactory:
         self._asy_hard_ub_factory = asy_hard_ub_factory
         self._product_asy_factory = product_asy_factory
         self._asy_deviation_cost_factory = asy_deviation_cost_factory
+        self._underload_cost_factory = underload_cost_factory
 
     def build(self) -> Coefficients:
         return Coefficients(
@@ -94,4 +102,5 @@ class CoefficientsFactory:
             asy_hard_ub=self._asy_hard_ub_factory.build(),
             product_asy=self._product_asy_factory.build(),
             asy_deviation_cost=self._asy_deviation_cost_factory.build(),
+            underload_cost=self._underload_cost_factory.build(),
         )

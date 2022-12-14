@@ -41,6 +41,7 @@ class Coefficients:
     asy_hard_ub: Dict[Tuple[str, str], float]  # order, assay
     product_asy: Dict[Tuple[str, str], float]  # product, assay
     asy_deviation_cost: Dict[str, float]  # assay
+    underload_cost: float  # cost per ton underloaded
     # max_underload: Dict[str, float]  # order
 
 
