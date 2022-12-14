@@ -14,7 +14,7 @@ router.get("/:scenario_id", async (req, res) => {
         new_id = uuidv4();
         let data = {
             scenario_id: new_id,
-            name: `Copy of ${scenario.name}`,
+            name: `${scenario.name} (Copy)`,
             status: "NEW",
             created_at: new Date(),
             input: scenario.input,

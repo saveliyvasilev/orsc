@@ -11,6 +11,7 @@ import { Modal } from "./components/Modal";
 
 import { TabView, TabPanel } from "primereact/tabview";
 import { OrderForm } from "./components/Inputs/OrderForm";
+import { ScenarioDescriptionForm } from "./components/Inputs/ScenarioDescriptionForm";
 
 export const ScenarioInput = () => {
     const [sInput, setSInput] = useState({});
@@ -19,6 +20,7 @@ export const ScenarioInput = () => {
     const [displayEditProductModal, setDisplayEditProductModal] = useState(false);
     const [displayCreateOrderModal, setDisplayCreateOrderModal] = useState(false);
     const [displayEditOrderModal, setDisplayEditOrderModal] = useState(false);
+    const [displayEditScenarioDescriptionModal, setDisplayEditScenarioDescriptionModal] = useState(false);
 
     const [initialProductData, setInitialProductData] = useState({});
     const [initialOrderData, setInitialOrderData] = useState({});
@@ -50,13 +52,6 @@ export const ScenarioInput = () => {
                 console.log("Submitted optimization!");
                 navigate("/", { replace: true });
             }
-        });
-    }
-
-    function handleScenarioNameOnChange(e) {
-        setSInput({
-            ...sInput,
-            name: e.target.value,
         });
     }
 
@@ -120,6 +115,18 @@ export const ScenarioInput = () => {
         handleEditOrderModalClose();
     }
 
+    function handleEditScenarioDescription(name) {
+        setSInput({
+            ...sInput,
+            name: name,
+        });
+        handleEditScenarioDescriptionModalClose();
+    }
+
+    function handleEditScenarioDescriptionClick() {
+        setDisplayEditScenarioDescriptionModal(() => true);
+    }
+
     function handleProductEditClick(product) {
         setInitialProductData(() => product);
         setDisplayEditProductModal(() => true);
@@ -167,15 +174,35 @@ export const ScenarioInput = () => {
     function handleEditOrderModalClose() {
         setDisplayEditOrderModal(false);
     }
+
+    function handleEditScenarioDescriptionModalClose() {
+        setDisplayEditScenarioDescriptionModal(false);
+    }
     return (
         <>
             {sInput.input !== undefined ? (
                 <>
                     <Section>
                         <div className="space-between">
-                            <InputText value={sInput.name} onChange={handleScenarioNameOnChange}></InputText>
+                            <div className="section-header">
+                                {sInput.name}{" "}
+                                <span
+                                    className="material-symbols-outlined accent icon outlined"
+                                    alt="Edit"
+                                    onClick={handleEditScenarioDescriptionClick}
+                                >
+                                    edit
+                                </span>
+                            </div>
                             <div className="comment">Scenario id: {sInput.scenario_id}</div>
                         </div>
+                        <Modal
+                            title="Edit scenario description"
+                            display={displayEditScenarioDescriptionModal}
+                            onClose={handleEditScenarioDescriptionModalClose}
+                        >
+                            <ScenarioDescriptionForm onSubmit={handleEditScenarioDescription} name={sInput.name} />
+                        </Modal>
                     </Section>
 
                     <Section>
