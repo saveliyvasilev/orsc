@@ -40,7 +40,9 @@ export const ScenarioOverview = () => {
         if (scenario.status === undefined) {
             return "";
         } else {
-            return <span className={`status-badge scenario-status-${scenario.status}`}>{scenario.status}</span>;
+            return (
+                <span className={`no-select status-badge scenario-status-${scenario.status}`}>{scenario.status}</span>
+            );
         }
     }
     function handleDelete(event, scenario) {
@@ -82,21 +84,22 @@ export const ScenarioOverview = () => {
         <>
             <Section>
                 <div className="table-container">
-                    <DataTable value={scenarios} responsiveLayout="scroll" scrollable scrollHeight="85vh">
+                    <DataTable value={scenarios} responsiveLayout="scroll" scrollHeight="85vh">
                         <Column
                             header="Scenario name"
                             field="name"
                             body={(rowData) => <Link to={"/scenarios/" + rowData.scenario_id}>{rowData.name}</Link>}
                         />
                         <Column header="Optimization time" field="created_at" body={optimizationTimeTemplate} />
-                        <Column header="Demand" body={demandTemplate} />
-                        <Column header="Underload" body={underloadTemplate} />
-                        <Column header="Cost" body={costTemplate} />
-                        <Column header="Status" body={statusTemplate} />
+                        <Column header="Demand" body={demandTemplate} align="right" />
+                        <Column header="Underload" body={underloadTemplate} align="right" />
+                        <Column header="Cost" body={costTemplate} align="right" />
+                        <Column header="Status" body={statusTemplate} align="center" />
                         <Column
                             header="Action"
+                            align="center"
                             body={(scenario) => (
-                                <div className="no-overflow">
+                                <div className="no-overflow no-select center">
                                     <span
                                         className="material-symbols-outlined danger icon outlined"
                                         alt="Delete"

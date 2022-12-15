@@ -17,7 +17,7 @@ export const OrderFulfillmentTable = ({ orders }) => {
     const assayStatusTemplate = (rowData) => {
         if (Math.abs(rowData.underload_amount - rowData.demand_amount) < numeric.eps) return null;
         const statusLabel = rowData.has_assay_deviation ? "OFF-SPEC" : "ON-SPEC";
-        return <span className={`status-badge assay-status-${statusLabel}`}>{statusLabel}</span>;
+        return <span className={`no-select status-badge assay-status-${statusLabel}`}>{statusLabel}</span>;
     };
 
     const underloadTemplate = (rowData) => {
@@ -69,11 +69,24 @@ export const OrderFulfillmentTable = ({ orders }) => {
                     header="Demand"
                     sortable
                     body={(rowData) => barrelFormat(rowData.demand_amount)}
+                    align="right"
                 ></Column>
-                <Column field="load_amount" header="Load" sortable body={loadTemplate}></Column>
-                <Column field="underload_amount" header="Underload" sortable body={underloadTemplate}></Column>
-                <Column field="has_assay_deviation" header="Assays" sortable body={assayStatusTemplate}></Column>
-                <Column field="load_cost" header="Cost" sortable body={costTemplate}></Column>
+                <Column field="load_amount" header="Load" sortable body={loadTemplate} align="right"></Column>
+                <Column
+                    field="underload_amount"
+                    header="Underload"
+                    sortable
+                    body={underloadTemplate}
+                    align="right"
+                ></Column>
+                <Column field="load_cost" header="Cost" sortable body={costTemplate} align="right"></Column>
+                <Column
+                    field="has_assay_deviation"
+                    header="Assays"
+                    sortable
+                    body={assayStatusTemplate}
+                    align="right"
+                ></Column>
             </DataTable>
         </div>
     );

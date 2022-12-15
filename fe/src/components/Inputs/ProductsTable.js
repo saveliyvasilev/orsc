@@ -51,8 +51,8 @@ export const ProductsTable = ({ products, onEditClick, onDeleteClick }) => {
                 scrollHeight="75vh"
             >
                 <Column field="product_id" header="Product ID" sortable></Column>
-                <Column field="reserves" header="Reserves" body={reservesBodyTemplate} sortable></Column>
-                <Column field="cost" header="Cost" body={costBodyTemplate} sortable></Column>
+                <Column field="reserves" header="Reserves" body={reservesBodyTemplate} sortable align="right"></Column>
+                <Column field="cost" header="Cost" body={costBodyTemplate} sortable align="right"></Column>
                 <Column
                     field="API_gravity"
                     header="API Gravity"
@@ -71,8 +71,9 @@ export const ProductsTable = ({ products, onEditClick, onDeleteClick }) => {
                 ></Column>
                 <Column
                     header="Action"
+                    align="center"
                     body={(product) => (
-                        <div className="no-overflow">
+                        <div className="no-overflow center no-select">
                             <span
                                 className="material-symbols-outlined danger icon outlined"
                                 alt="Delete"

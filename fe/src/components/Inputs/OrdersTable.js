@@ -51,7 +51,7 @@ export const OrdersTable = ({ orders, onEditClick, onDeleteClick }) => {
         <div className="table-container">
             <DataTable value={orders} responsiveLayout="scroll" scrollHeight="75vh">
                 <Column field="order_id" header="Order ID" sortable></Column>
-                <Column field="amount" header="Demand" body={demandBodyTemplate} sortable></Column>
+                <Column field="amount" header="Demand" body={demandBodyTemplate} sortable align="right"></Column>
                 <Column
                     header="API Gravity"
                     style={{ width: "25em" }}
@@ -70,8 +70,9 @@ export const OrdersTable = ({ orders, onEditClick, onDeleteClick }) => {
                 ></Column>
                 <Column
                     header="Action"
+                    align="center"
                     body={(order) => (
-                        <div className="no-overflow">
+                        <div className="no-overflow center no-select">
                             <span
                                 className="material-symbols-outlined danger icon outlined"
                                 alt="Delete"
