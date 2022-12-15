@@ -7,17 +7,14 @@ import { SmallKPICard } from "../SmallKPICard";
 export const ProductUsageCard = ({ product }) => {
     return (
         <div className="product-usage-card-container">
+            <div className="small-card-container">
+                <SmallKPICard title={"Reserves"} value={barrelFormat(product.reserves)}></SmallKPICard>
+                <SmallKPICard title={"Loaded"} value={barrelFormat(product.loaded)}></SmallKPICard>
+                <SmallKPICard title={"Leftover"} value={barrelFormat(product.leftover)}></SmallKPICard>
+                <SmallKPICard title={"Cost per unit"} value={currencyFormat(product.cost_per_unit)}></SmallKPICard>
+            </div>
             {product.load_details.length ? (
                 <>
-                    <div className="small-card-container">
-                        <SmallKPICard title={"Reserves"} value={barrelFormat(product.reserves)}></SmallKPICard>
-                        <SmallKPICard title={"Loaded"} value={barrelFormat(product.loaded)}></SmallKPICard>
-                        <SmallKPICard title={"Leftover"} value={barrelFormat(product.leftover)}></SmallKPICard>
-                        <SmallKPICard
-                            title={"Cost per unit"}
-                            value={currencyFormat(product.cost_per_unit)}
-                        ></SmallKPICard>
-                    </div>
                     <div className="table-container non-clickable-row-cursor light-table-header">
                         <DataTable
                             value={product.load_details}
