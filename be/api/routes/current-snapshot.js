@@ -10,8 +10,8 @@ router.get("/", (req, res) => {
     // rabbit holes.
 
     const defaultScenarioSettings = {
-        API_gravity_deviation_cost: 1,
-        sulfur_deviation_cost: 161,
+        API_gravity_deviation_cost: 7,
+        sulfur_deviation_cost: 1000,
         underload_cost: 100,
     };
 
