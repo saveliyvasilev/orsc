@@ -19,7 +19,7 @@ services:
             - "3001:3001"
             - "9229:9229"  # for attaching node debugger
         volumes:
-            - ./be/api:/app
+            - ./be/api:/app  # TODO: this removes whatever the image build in the dockerfile made in node_modules.
             - ./be/workers/blending/data_generator:/app/data
         depends_on:
             - rabbitmq
